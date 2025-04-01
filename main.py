@@ -28,12 +28,13 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# Import from our fixed detector versions to avoid the InsightFace issues
+# Import from OpenCV detector directly to avoid InsightFace issues
 try:
     from src.face.opencv_detector import FaceDetector
 
     logger.info("Using OpenCV detector")
-except ImportError:
+except ImportError as e:
+    logger.error(f"Error importing OpenCV detector: {e}")
     try:
         from src.face.detector_fixed import FaceDetector
 

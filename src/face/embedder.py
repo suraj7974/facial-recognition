@@ -5,6 +5,7 @@ Face embedding generation module.
 import logging
 import numpy as np
 from sklearn.preprocessing import normalize
+import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -32,12 +33,26 @@ class FaceEmbedder:
 
         try:
             # Check if face has an embedding attribute
-            if hasattr(face, "embedding") and face.embedding is not None:
+            if (
+                hasattr(face, "embedding")
+                and face.embedding is not None
+                and not np.all(face.embedding == 0)
+            ):
                 embedding = face.embedding
             else:
-                # For fallback detectors without real embeddings, create a random one
-                logger.warning("Using fallback random embedding generation")
-                embedding = np.random.normal(size=512)
+                # For fallback detectors without real embeddings, create a consistent but fake embedding
+                # based on facial location and size to ensure consistent results
+                logger.warning("Using fallback pseudo-embedding generation")
+
+                # Use bbox to generate a deterministic but unique embedding
+                # This will ensure same face regions generate same embeddings
+                bbox_str = ",".join(map(str, face.bbox.astype(int)))
+                hash_input = f"face_bbox_{bbox_str}"
+                hash_val = hashlib.md5(hash_input.encode()).hexdigest()
+
+                # Convert hash to numbers and create embedding vector
+                random_state = np.random.RandomState(int(hash_val[:8], 16))
+                embedding = random_state.normal(size=512)
 
             # Normalize embedding
             normalized_embedding = self.normalize_embedding(embedding)

@@ -1,0 +1,13 @@
+2025-04-02 04:05:54,160 - __main__ - INFO - Using OpenCV detector
+2025-04-02 04:05:54,164 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-02 04:05:54,687 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 04:05:54,701 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 04:05:54,704 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 04:05:54,706 - __main__ - INFO - Creating database...
+2025-04-02 04:05:54,728 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-02 04:05:54,728 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 04:05:54,729 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 04:05:54,729 - __main__ - INFO - Creating database from face_data
+2025-04-02 04:05:54,729 - __main__ - INFO - Using standard database
+2025-04-02 04:05:54,729 - __main__ - ERROR - No person folders found in face_data
+2025-04-02 04:05:54,729 - __main__ - INFO - Database creation completed

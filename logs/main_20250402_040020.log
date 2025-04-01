@@ -1,0 +1,21 @@
+2025-04-02 04:00:20,480 - __main__ - INFO - Using OpenCV detector
+2025-04-02 04:00:20,481 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-02 04:00:21,009 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 04:00:21,024 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 04:00:21,029 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 04:00:21,032 - __main__ - INFO - Testing recognition...
+2025-04-02 04:00:21,055 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-02 04:00:21,055 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 04:00:21,056 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 04:00:21,056 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-02 04:00:21,371 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 04:00:21,371 - __main__ - INFO - Unknown face with score 0.0000 in 0.291s
+2025-04-02 04:00:21,371 - __main__ - INFO - Top matches:
+2025-04-02 04:00:21,371 - __main__ - INFO -   Sachin Tendulkar: 0.0930
+2025-04-02 04:00:21,371 - __main__ - INFO -   MS Dhoni: 0.0874
+2025-04-02 04:00:21,371 - __main__ - INFO -   Ayushmann Khurrana: 0.0680
+2025-04-02 04:00:21,371 - __main__ - INFO -   Rahul Gandhi: 0.0623
+2025-04-02 04:00:21,371 - __main__ - INFO -   Ajay Devgn: 0.0600
+2025-04-02 04:00:21,624 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 04:00:21,647 - __main__ - INFO - Saved result to result.jpg
+2025-04-02 04:00:21,655 - __main__ - INFO - Testing completed

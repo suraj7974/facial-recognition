@@ -1,0 +1,20 @@
+2025-04-02 04:10:20,347 - __main__ - INFO - Using OpenCV detector
+2025-04-02 04:10:20,348 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-02 04:10:20,864 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 04:10:20,877 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 04:10:20,882 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 04:10:20,885 - __main__ - INFO - Testing recognition...
+2025-04-02 04:10:20,907 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-02 04:10:20,907 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 04:10:20,908 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 04:10:20,908 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-02 04:10:21,230 - src.access_control.verifier - INFO - Access GRANTED - Person: shubham, Score: 0.5948
+2025-04-02 04:10:21,230 - __main__ - INFO - Recognized as shubham with score 0.5948 in 0.300s
+2025-04-02 04:10:21,230 - __main__ - INFO - Top matches:
+2025-04-02 04:10:21,230 - __main__ - INFO -   shubham: 0.5948
+2025-04-02 04:10:21,230 - __main__ - INFO -   mayank: 0.0776
+2025-04-02 04:10:21,230 - __main__ - INFO -   Kamal Haasan: 0.0686
+2025-04-02 04:10:21,230 - __main__ - INFO -   Ranbir Kapoor: 0.0602
+2025-04-02 04:10:21,230 - __main__ - INFO -   Kareena Kapoor: 0.0554
+2025-04-02 04:10:21,516 - src.access_control.verifier - INFO - Access GRANTED - Person: shubham, Score: 0.5948
+2025-04-02 04:10:23,471 - __main__ - INFO - Testing completed

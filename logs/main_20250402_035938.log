@@ -1,0 +1,20 @@
+2025-04-02 03:59:38,438 - __main__ - INFO - Using OpenCV detector
+2025-04-02 03:59:38,440 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-02 03:59:39,078 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 03:59:39,094 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 03:59:39,100 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 03:59:39,103 - __main__ - INFO - Testing recognition...
+2025-04-02 03:59:39,127 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-02 03:59:39,127 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 03:59:39,128 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 03:59:39,128 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-02 03:59:39,621 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 03:59:39,621 - __main__ - INFO - Unknown face with score 0.0000 in 0.485s
+2025-04-02 03:59:39,621 - __main__ - INFO - Top matches:
+2025-04-02 03:59:39,621 - __main__ - INFO -   Amitabh Bachchan: 0.1085
+2025-04-02 03:59:39,621 - __main__ - INFO -   Rajkummar Rao: 0.0896
+2025-04-02 03:59:39,621 - __main__ - INFO -   Jasprit Bumrah: 0.0604
+2025-04-02 03:59:39,621 - __main__ - INFO -   Ajay Devgn: 0.0584
+2025-04-02 03:59:39,621 - __main__ - INFO -   Ranbir Kapoor: 0.0521
+2025-04-02 03:59:40,043 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 03:59:41,905 - __main__ - INFO - Testing completed

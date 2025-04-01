@@ -10,23 +10,29 @@ from datetime import datetime
 
 from config import settings
 
+logger = logging.getLogger(__name__)
+
+# Update import order to try opencv_detector first
 try:
-    # Try the fixed detector first
-    from src.face.detector_fixed import FaceDetector
+    # Try the OpenCV detector first
+    from src.face.opencv_detector import FaceDetector
 
-    logger = logging.getLogger(__name__)
-    logger.info("Using fixed detector implementation")
+    logger.info("Using OpenCV detector")
 except ImportError:
-    # Fall back to original detector if fixed one fails
     try:
-        from src.face.detector import FaceDetector
+        # Fall back to fixed detector if OpenCV detector is unavailable
+        from src.face.detector_fixed import FaceDetector
 
-        logger = logging.getLogger(__name__)
-        logger.warning("Using original detector implementation")
+        logger.info("Using fixed detector implementation")
     except ImportError as e:
-        logger = logging.getLogger(__name__)
-        logger.error(f"Error importing face detector: {e}")
-        raise
+        try:
+            # Last resort: try the original detector
+            from src.face.detector import FaceDetector
+
+            logger.warning("Using original detector implementation")
+        except ImportError as e:
+            logger.error(f"Error importing face detector: {e}")
+            raise
 
 from src.face.embedder import FaceEmbedder
 from src.database.embeddings_db import EmbeddingsDatabase
