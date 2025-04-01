@@ -1,0 +1,13 @@
+2025-04-02 03:39:58,984 - __main__ - INFO - Using OpenCV detector
+2025-04-02 03:39:59,008 - src.access_control.verifier - INFO - Using fixed detector implementation
+2025-04-02 03:39:59,331 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 03:39:59,349 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 03:39:59,352 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 03:39:59,356 - __main__ - INFO - Creating database...
+2025-04-02 03:39:59,357 - src.face.opencv_detector - ERROR - Error initializing OpenCV face detector: name 'os' is not defined
+2025-04-02 03:39:59,357 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 03:39:59,357 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 03:39:59,357 - __main__ - INFO - Creating database from face_data
+2025-04-02 03:39:59,358 - __main__ - INFO - Using standard database
+2025-04-02 03:39:59,358 - __main__ - ERROR - Root folder does not exist: face_data
+2025-04-02 03:39:59,358 - __main__ - INFO - Database creation completed

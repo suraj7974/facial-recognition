@@ -1,0 +1,23 @@
+2025-04-02 03:49:30,110 - __main__ - INFO - Using OpenCV detector
+2025-04-02 03:49:30,139 - src.access_control.verifier - INFO - Using fixed detector implementation
+2025-04-02 03:49:30,616 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 03:49:30,642 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 03:49:30,648 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 03:49:30,650 - __main__ - INFO - Testing recognition...
+2025-04-02 03:49:30,650 - src.face.detector_fixed - ERROR - Error initializing fixed face detector: No module named 'insightface'
+2025-04-02 03:49:30,650 - src.face.detector_fixed - INFO - Trying fallback to directly load detection models...
+2025-04-02 03:49:30,650 - src.face.detector_fixed - WARNING - Using fallback implementation with direct ONNX model loading
+2025-04-02 03:49:30,650 - src.face.detector_fixed - WARNING - Using extremely basic face detection fallback
+2025-04-02 03:49:30,650 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 03:49:30,651 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 03:49:30,651 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-02 03:49:30,669 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 03:49:30,669 - __main__ - INFO - Unknown face with score 0.0000 in 0.001s
+2025-04-02 03:49:30,669 - __main__ - INFO - Top matches:
+2025-04-02 03:49:30,669 - __main__ - INFO -   Aamir Khan: 0.0000
+2025-04-02 03:49:30,669 - __main__ - INFO -   Aishwarya Rai: 0.0000
+2025-04-02 03:49:30,669 - __main__ - INFO -   Ajay Devgn: 0.0000
+2025-04-02 03:49:30,670 - __main__ - INFO -   Akshay Kumar: 0.0000
+2025-04-02 03:49:30,670 - __main__ - INFO -   Alia Bhatt: 0.0000
+2025-04-02 03:49:30,671 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-04-02 03:49:34,894 - __main__ - INFO - Testing completed

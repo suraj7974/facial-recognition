@@ -1,0 +1,37 @@
+2025-04-02 03:47:29,929 - __main__ - INFO - Using OpenCV detector
+2025-04-02 03:47:29,953 - src.access_control.verifier - INFO - Using fixed detector implementation
+2025-04-02 03:47:30,277 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-02 03:47:30,296 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-02 03:47:30,299 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-02 03:47:30,303 - __main__ - INFO - Creating database...
+2025-04-02 03:47:30,319 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-02 03:47:30,319 - src.face.embedder - INFO - Initialized face embedder
+2025-04-02 03:47:30,319 - src.database.embeddings_db - INFO - Loaded database with 52 identities
+2025-04-02 03:47:30,319 - __main__ - INFO - Creating database from face_data
+2025-04-02 03:47:30,319 - __main__ - INFO - Using standard database
+2025-04-02 03:47:30,319 - __main__ - INFO - Found 3 person folders
+2025-04-02 03:47:30,324 - __main__ - INFO - Processing Person_2's images...
+2025-04-02 03:47:30,418 - __main__ - WARNING - No face detected in face_data/Person_2/image_3.jpg
+2025-04-02 03:47:30,508 - __main__ - WARNING - No face detected in face_data/Person_2/image_1.jpg
+2025-04-02 03:47:30,621 - __main__ - WARNING - No face detected in face_data/Person_2/image_5.jpg
+2025-04-02 03:47:30,720 - __main__ - WARNING - No face detected in face_data/Person_2/image_2.jpg
+2025-04-02 03:47:30,837 - __main__ - WARNING - No face detected in face_data/Person_2/image_4.jpg
+2025-04-02 03:47:30,842 - __main__ - WARNING - Too few valid images for Person_2: 0 < 1
+2025-04-02 03:47:30,842 - __main__ - INFO - Processing Person_3's images...
+2025-04-02 03:47:30,982 - __main__ - WARNING - No face detected in face_data/Person_3/image_3.jpg
+2025-04-02 03:47:31,092 - __main__ - WARNING - No face detected in face_data/Person_3/image_1.jpg
+2025-04-02 03:47:31,176 - __main__ - WARNING - No face detected in face_data/Person_3/image_5.jpg
+2025-04-02 03:47:31,258 - __main__ - WARNING - No face detected in face_data/Person_3/image_2.jpg
+2025-04-02 03:47:31,338 - __main__ - WARNING - No face detected in face_data/Person_3/image_4.jpg
+2025-04-02 03:47:31,338 - __main__ - WARNING - Too few valid images for Person_3: 0 < 1
+2025-04-02 03:47:31,338 - __main__ - INFO - Processing Person_1's images...
+2025-04-02 03:47:31,419 - __main__ - WARNING - No face detected in face_data/Person_1/image_3.jpg
+2025-04-02 03:47:31,499 - __main__ - WARNING - No face detected in face_data/Person_1/image_1.jpg
+2025-04-02 03:47:31,581 - __main__ - WARNING - No face detected in face_data/Person_1/image_5.jpg
+2025-04-02 03:47:31,672 - __main__ - WARNING - No face detected in face_data/Person_1/image_2.jpg
+2025-04-02 03:47:31,752 - __main__ - WARNING - No face detected in face_data/Person_1/image_4.jpg
+2025-04-02 03:47:31,752 - __main__ - WARNING - Too few valid images for Person_1: 0 < 1
+2025-04-02 03:47:31,753 - src.database.embeddings_db - INFO - Saved database with 52 identities
+2025-04-02 03:47:31,753 - __main__ - INFO - Database created with 52 identities
+2025-04-02 03:47:31,753 - __main__ - INFO - Identities: Aamir Khan, Aishwarya Rai, Ajay Devgn, Akshay Kumar, Alia Bhatt, Allu Arjun, Amit Shah, Amitabh Bachchan, Anushka Sharma, Arvind Kejriwal, Ayushmann Khurrana, Deepika Padukone, Dhanush, Hardik Pandya, Hrithik Roshan, Jasprit Bumrah, Kamal Haasan, Kareena Kapoor, Katrina Kaif, Madhuri Dixit, Mary Kom, mayank, MS Dhoni, Narendra Modi, Neeraj Chopra, Prabhas, Priyanka Chopra, PV Sindhu, Rahul Dravid, Rahul Gandhi, Rajinikanth, Rajkummar Rao, Ranbir Kapoor, Rani Mukerji, Ranveer Singh, Rekha, Rohit Sharma, Sachin Tendulkar, Saina Nehwal, Salman Khan, Sania Mirza, Shah Rukh Khan, shubham, Sonam Kapoor, Sourav Ganguly, Sridevi, Sunil Chhetri, Sushmita Sen, Vidya Balan, Vijay, Virat Kohli, vipin
+2025-04-02 03:47:31,754 - __main__ - INFO - Database creation completed

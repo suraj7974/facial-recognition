@@ -1,0 +1,2 @@
+2025-04-02 03:38:59,669 - __main__ - INFO - Using OpenCV detector
+2025-04-02 03:38:59,691 - src.access_control.verifier - INFO - Using fixed detector implementation
