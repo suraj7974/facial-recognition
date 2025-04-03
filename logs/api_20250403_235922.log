@@ -1,0 +1,14 @@
+2025-04-03 23:59:22,131 - __main__ - INFO - Using OpenCV detector
+2025-04-03 23:59:22,846 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-03 23:59:22,895 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-03 23:59:22,898 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-03 23:59:22,920 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-03 23:59:22,920 - src.face.embedder - INFO - Initialized face embedder
+2025-04-03 23:59:22,921 - src.database.embeddings_db - INFO - Loaded database with 53 identities
+2025-04-03 23:59:22,921 - __main__ - INFO - Database loaded with 53 identities
+2025-04-03 23:59:22,922 - __main__ - INFO - Starting API server on 0.0.0.0:5000 in development mode
+2025-04-03 23:59:22,927 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-03 23:59:22,927 - werkzeug - INFO -  * Running on http://192.168.1.10:5000/ (Press CTRL+C to quit)
+2025-04-03 23:59:40,101 - __main__ - INFO - Processing uploaded file: WhatsApp_Image_2025-04-03_at_12.50.45_AM3.jpeg
+2025-04-03 23:59:40,598 - werkzeug - INFO - 127.0.0.1 - - [03/Apr/2025 23:59:40] "POST /api/recognize HTTP/1.1" 200 -

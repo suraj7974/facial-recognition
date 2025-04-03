@@ -16,14 +16,19 @@ from io import BytesIO
 from datetime import datetime
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
+import ssl
 
 # Configure logging
+LOG_DIR = "logs"
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(
-            os.path.join("logs", f'api_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+            os.path.join(LOG_DIR, f'api_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
         ),
         logging.StreamHandler(),
     ],
@@ -60,6 +65,7 @@ UPLOAD_FOLDER = "uploads"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # Limit uploads to 16MB
 
 # Initialize components
 detector = FaceDetector(detection_threshold=settings.DETECTION_THRESHOLD)
@@ -70,6 +76,13 @@ if settings.USE_FAISS:
     database = FaissDatabase()
 else:
     database = EmbeddingsDatabase()
+
+# Check database at startup
+db_info = database.get_database_info()
+if db_info["num_identities"] == 0:
+    logger.warning("Database is empty. Please add identities first.")
+else:
+    logger.info(f"Database loaded with {db_info['num_identities']} identities")
 
 
 def process_image_recognition(image_data, recognition_threshold=None):
@@ -172,21 +185,32 @@ def recognize_face():
             return jsonify({"success": False, "error": "No selected file"}), 400
 
         # Save uploaded file
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(
-            app.config["UPLOAD_FOLDER"], f"{int(time.time())}_{filename}"
-        )
-        file.save(filepath)
-
-        # Read image
-        img = cv2.imread(filepath)
-        if img is None:
-            return (
-                jsonify({"success": False, "error": "Failed to read image file"}),
-                400,
+        try:
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(
+                app.config["UPLOAD_FOLDER"], f"{int(time.time())}_{filename}"
             )
+            file.save(filepath)
 
-        logger.info(f"Processing uploaded file: {filename}")
+            # Read image
+            img = cv2.imread(filepath)
+            if img is None:
+                return (
+                    jsonify({"success": False, "error": "Failed to read image file"}),
+                    400,
+                )
+
+            logger.info(f"Processing uploaded file: {filename}")
+
+            # Clean up file after processing to save space
+            try:
+                os.remove(filepath)
+            except:
+                pass  # Ignore errors in cleanup
+
+        except Exception as e:
+            logger.error(f"Error processing file upload: {e}")
+            return jsonify({"success": False, "error": str(e)}), 500
 
     # Process base64 encoded image
     elif "image_base64" in request.json:
@@ -234,40 +258,84 @@ def recognize_face():
 @app.route("/api/health", methods=["GET"])
 def health_check():
     """Health check endpoint."""
-    return jsonify(
-        {
-            "status": "ok",
-            "time": datetime.now().isoformat(),
-            "database_size": len(database.get_database_info()["identities"]),
-        }
-    )
+    try:
+        db_info = database.get_database_info()
+        return jsonify(
+            {
+                "status": "ok",
+                "time": datetime.now().isoformat(),
+                "database_size": len(db_info["identities"]),
+                "version": "1.0.0",
+            }
+        )
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        return jsonify({"status": "error", "error": str(e)}), 500
 
 
 @app.route("/api/database/info", methods=["GET"])
 def database_info():
     """Get database information."""
-    db_info = database.get_database_info()
+    try:
+        db_info = database.get_database_info()
+        return jsonify(
+            {
+                "success": True,
+                "database_type": "FAISS" if settings.USE_FAISS else "Standard",
+                "num_identities": db_info["num_identities"],
+                "identities": db_info["identities"],
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error getting database info: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/", methods=["GET"])
+def index():
+    """Root endpoint for basic information."""
     return jsonify(
         {
-            "success": True,
-            "database_type": "FAISS" if settings.USE_FAISS else "Standard",
-            "num_identities": db_info["num_identities"],
-            "identities": db_info["identities"],
+            "service": "Face Recognition API",
+            "version": "1.0.0",
+            "status": "running",
+            "endpoints": [
+                {"path": "/", "method": "GET", "description": "Service information"},
+                {"path": "/api/health", "method": "GET", "description": "Health check"},
+                {
+                    "path": "/api/database/info",
+                    "method": "GET",
+                    "description": "Database information",
+                },
+                {
+                    "path": "/api/recognize",
+                    "method": "POST",
+                    "description": "Face recognition endpoint",
+                },
+            ],
         }
     )
 
 
 if __name__ == "__main__":
-    # Check if database has identities
-    db_info = database.get_database_info()
-    if db_info["num_identities"] == 0:
-        logger.warning("Database is empty. Please add identities first.")
-        print("Warning: Database is empty. Please create a database first:")
-        print("  python main.py create-db --root face_data")
-
     # Get port from environment or use default
     port = int(os.environ.get("PORT", 5000))
 
-    # Run the application
-    logger.info(f"Starting API server on port {port}")
-    app.run(host="0.0.0.0", port=port, debug=False)
+    # Get host from environment or use default
+    host = os.environ.get("HOST", "0.0.0.0")
+
+    # Check for production mode
+    production_mode = os.environ.get("PRODUCTION", "false").lower() == "true"
+
+    logger.info(
+        f"Starting API server on {host}:{port} in {'production' if production_mode else 'development'} mode"
+    )
+
+    if production_mode:
+        # In production mode, use Gunicorn instead (this won't execute)
+        logger.info(
+            "In production mode, use: gunicorn --workers=4 --bind=0.0.0.0:5000 api_service:app"
+        )
+    else:
+        # Development mode
+        app.run(host=host, port=port, debug=False)
