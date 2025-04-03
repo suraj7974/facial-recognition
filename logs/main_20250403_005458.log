@@ -1,0 +1,20 @@
+2025-04-03 00:54:58,411 - __main__ - INFO - Using OpenCV detector
+2025-04-03 00:54:58,411 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-03 00:54:58,923 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-03 00:54:58,936 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-03 00:54:58,940 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-03 00:54:58,942 - __main__ - INFO - Testing recognition...
+2025-04-03 00:54:58,958 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-03 00:54:58,958 - src.face.embedder - INFO - Initialized face embedder
+2025-04-03 00:54:58,959 - src.database.embeddings_db - INFO - Loaded database with 53 identities
+2025-04-03 00:54:58,959 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-03 00:54:59,253 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5156
+2025-04-03 00:54:59,253 - __main__ - INFO - Recognized as Suraj with score 0.5156 in 0.277s
+2025-04-03 00:54:59,253 - __main__ - INFO - Top matches:
+2025-04-03 00:54:59,253 - __main__ - INFO -   Suraj: 0.5156
+2025-04-03 00:54:59,253 - __main__ - INFO -   MS Dhoni: 0.0875
+2025-04-03 00:54:59,253 - __main__ - INFO -   Hrithik Roshan: 0.0774
+2025-04-03 00:54:59,253 - __main__ - INFO -   Rahul Dravid: 0.0677
+2025-04-03 00:54:59,253 - __main__ - INFO -   Virat Kohli: 0.0633
+2025-04-03 00:54:59,508 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5156
+2025-04-03 00:55:00,959 - __main__ - INFO - Testing completed

@@ -1,0 +1,20 @@
+2025-04-03 00:55:09,425 - __main__ - INFO - Using OpenCV detector
+2025-04-03 00:55:09,425 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-04-03 00:55:09,968 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-04-03 00:55:09,981 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-03 00:55:09,985 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-03 00:55:09,988 - __main__ - INFO - Testing recognition...
+2025-04-03 00:55:10,006 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-04-03 00:55:10,007 - src.face.embedder - INFO - Initialized face embedder
+2025-04-03 00:55:10,007 - src.database.embeddings_db - INFO - Loaded database with 53 identities
+2025-04-03 00:55:10,007 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-04-03 00:55:10,392 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5280
+2025-04-03 00:55:10,392 - __main__ - INFO - Recognized as Suraj with score 0.5280 in 0.365s
+2025-04-03 00:55:10,392 - __main__ - INFO - Top matches:
+2025-04-03 00:55:10,392 - __main__ - INFO -   Suraj: 0.5280
+2025-04-03 00:55:10,392 - __main__ - INFO -   mayank: 0.1376
+2025-04-03 00:55:10,392 - __main__ - INFO -   Ranveer Singh: 0.0829
+2025-04-03 00:55:10,392 - __main__ - INFO -   Priyanka Chopra: 0.0819
+2025-04-03 00:55:10,392 - __main__ - INFO -   Hardik Pandya: 0.0807
+2025-04-03 00:55:10,739 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5280
+2025-04-03 00:55:16,578 - __main__ - INFO - Testing completed
