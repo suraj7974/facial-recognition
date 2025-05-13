@@ -103,9 +103,17 @@ def process_image_recognition(image_data, recognition_threshold=None):
         # Start timing
         start_time = time.time()
 
-        # Detect face
-        face = detector.get_largest_face(image_data)
+        # Add debug logging
+        logger.debug("Attempting to detect face...")
+
+        try:
+            face = detector.get_largest_face(image_data)
+        except Exception as face_error:
+            logger.error(f"Face detection error: {face_error}")
+            face = None
+
         if face is None:
+            logger.info("No face detected in image")
             return {
                 "success": False,
                 "error": "No face detected in image",
@@ -330,6 +338,18 @@ if __name__ == "__main__":
     logger.info(
         f"Starting API server on {host}:{port} in {'production' if production_mode else 'development'} mode"
     )
+
+    # Add more detailed logging at startup
+    logger.info("Verifying detector initialization...")
+    try:
+        test_methods = ["detect_faces", "get_largest_face", "draw_face_locations"]
+        for method in test_methods:
+            if not hasattr(detector, method):
+                logger.error(f"Detector missing required method: {method}")
+            else:
+                logger.info(f"Detector has required method: {method}")
+    except Exception as e:
+        logger.error(f"Error verifying detector: {e}")
 
     if production_mode:
         # In production mode, use Gunicorn instead (this won't execute)

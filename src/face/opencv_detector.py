@@ -168,19 +168,33 @@ class FaceDetector:
         Returns:
             Largest face or None if no faces detected
         """
-        faces = self.detect_faces(img)
+        try:
+            faces = self.detect_faces(img)
 
-        if not faces:
+            if not faces:
+                logger.debug("No faces detected in image")
+                return None
+
+            # Get largest face by bounding box area
+            largest_face = max(
+                faces,
+                key=lambda face: (face.bbox[2] - face.bbox[0])
+                * (face.bbox[3] - face.bbox[1]),
+            )
+
+            # Check detection score against threshold
+            if largest_face.det_score < self.detection_threshold:
+                logger.debug(
+                    f"Largest face detection score {largest_face.det_score} below threshold"
+                )
+                return None
+
+            logger.debug(f"Found largest face with score {largest_face.det_score}")
+            return largest_face
+
+        except Exception as e:
+            logger.error(f"Error in get_largest_face: {e}")
             return None
-
-        # Get largest face by bounding box area
-        largest_face = max(
-            faces,
-            key=lambda face: (face.bbox[2] - face.bbox[0])
-            * (face.bbox[3] - face.bbox[1]),
-        )
-
-        return largest_face
 
     def get_face_locations(self, face):
         """
