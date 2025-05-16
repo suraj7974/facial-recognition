@@ -1,0 +1,4 @@
+2025-05-17 01:30:58,931 - __main__ - INFO - Using OpenCV detector
+2025-05-17 01:31:02,245 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:31:02,265 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:31:02,270 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.

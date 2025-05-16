@@ -1,0 +1,20 @@
+2025-05-17 01:47:07,045 - __main__ - ERROR - Error importing OpenCV detector: No module named 'src.face.opencv_detector'
+2025-05-17 01:47:09,422 - __main__ - INFO - Using fixed detector
+2025-05-17 01:47:09,806 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:47:09,826 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:47:09,831 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:47:09,836 - __main__ - INFO - Testing recognition...
+2025-05-17 01:47:11,009 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:47:11,009 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:47:11,015 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 01:47:11,016 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:47:11,637 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.8756
+2025-05-17 01:47:11,637 - __main__ - INFO - Recognized as Suraj with score 0.8756 in 0.617s
+2025-05-17 01:47:11,637 - __main__ - INFO - Top matches:
+2025-05-17 01:47:11,637 - __main__ - INFO -   Suraj: 0.8756
+2025-05-17 01:47:11,637 - __main__ - INFO -   shubham: 0.2714
+2025-05-17 01:47:11,637 - __main__ - INFO -   Vijay: 0.1200
+2025-05-17 01:47:11,637 - __main__ - INFO -   Rajinikanth: 0.0766
+2025-05-17 01:47:11,637 - __main__ - INFO -   vipin: 0.0706
+2025-05-17 01:47:12,240 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.8756
+2025-05-17 01:47:18,009 - __main__ - INFO - Testing completed

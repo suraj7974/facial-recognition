@@ -1,0 +1,20 @@
+2025-05-17 01:46:26,883 - __main__ - ERROR - Error importing OpenCV detector: No module named 'src.face.opencv_detector'
+2025-05-17 01:46:29,399 - __main__ - INFO - Using fixed detector
+2025-05-17 01:46:29,868 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:46:29,891 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:46:29,898 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:46:29,903 - __main__ - INFO - Testing recognition...
+2025-05-17 01:46:31,127 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:46:31,127 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:46:31,127 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 01:46:31,127 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:46:31,792 - src.access_control.verifier - INFO - Access GRANTED - Person: vipin, Score: 0.8319
+2025-05-17 01:46:31,793 - __main__ - INFO - Recognized as vipin with score 0.8319 in 0.662s
+2025-05-17 01:46:31,793 - __main__ - INFO - Top matches:
+2025-05-17 01:46:31,793 - __main__ - INFO -   vipin: 0.8319
+2025-05-17 01:46:31,793 - __main__ - INFO -   Ranveer Singh: 0.0921
+2025-05-17 01:46:31,793 - __main__ - INFO -   Shah Rukh Khan: 0.0830
+2025-05-17 01:46:31,793 - __main__ - INFO -   Rahul Gandhi: 0.0728
+2025-05-17 01:46:31,793 - __main__ - INFO -   Sania Mirza: 0.0428
+2025-05-17 01:46:32,354 - src.access_control.verifier - INFO - Access GRANTED - Person: vipin, Score: 0.8319
+2025-05-17 01:46:34,788 - __main__ - INFO - Testing completed

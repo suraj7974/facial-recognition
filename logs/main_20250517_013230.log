@@ -1,0 +1,19 @@
+2025-05-17 01:32:30,554 - __main__ - INFO - Using OpenCV detector
+2025-05-17 01:32:34,289 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:32:34,330 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:32:34,335 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:32:34,340 - __main__ - INFO - Testing recognition...
+2025-05-17 01:32:35,736 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:32:35,736 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:32:35,736 - src.database.embeddings_db - INFO - Loaded database with 53 identities
+2025-05-17 01:32:35,741 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:32:36,428 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-05-17 01:32:36,428 - __main__ - INFO - Unknown face with score 0.0000 in 0.673s
+2025-05-17 01:32:36,428 - __main__ - INFO - Top matches:
+2025-05-17 01:32:36,428 - __main__ - INFO -   Vidya Balan: 0.1267
+2025-05-17 01:32:36,428 - __main__ - INFO -   Vijay: 0.1191
+2025-05-17 01:32:36,429 - __main__ - INFO -   Alia Bhatt: 0.1095
+2025-05-17 01:32:36,429 - __main__ - INFO -   Rajkummar Rao: 0.0744
+2025-05-17 01:32:36,429 - __main__ - INFO -   PV Sindhu: 0.0743
+2025-05-17 01:32:37,037 - src.access_control.verifier - INFO - Access DENIED - Person: Unknown, Score: 0.0000
+2025-05-17 01:32:39,013 - __main__ - INFO - Testing completed

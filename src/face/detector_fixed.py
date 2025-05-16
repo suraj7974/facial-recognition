@@ -1,14 +1,11 @@
 """
-Fixed face detection module using InsightFace with dependency workaround.
+Face detection module using InsightFace.
 """
 
 import logging
 import numpy as np
+from insightface.app import FaceAnalysis
 import cv2
-import os
-import onnxruntime
-import importlib.util
-import sys
 
 from config import settings
 
@@ -16,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class FaceDetector:
-    """Face detector class using InsightFace with workaround for import issues."""
+    """Face detector class using InsightFace."""
 
     def __init__(
         self,
@@ -40,134 +37,20 @@ class FaceDetector:
         self.detection_threshold = detection_threshold
         self.app = None
 
-        # Try to import directly from alternate paths to avoid problematic dependencies
         self._initialize_model()
 
     def _initialize_model(self):
-        """Initialize the InsightFace model with workaround for dependency issues."""
+        """Initialize the InsightFace model."""
         try:
-            # First attempt: Try direct import of FaceAnalysis to avoid problematic import path
-            # This bypasses the mesh_core_cython import issue
-            from insightface.model_zoo import model_zoo
-            from insightface.app.common import Face
-
-            # Create a simplified FaceAnalysis-like class
-            class SimpleFaceAnalysis:
-                def __init__(self, name, providers):
-                    self.det_model = None
-                    self.rec_model = None
-                    self.det_size = (640, 640)
-                    self.providers = providers
-                    self.name = name
-                    self.Face = Face
-
-                def prepare(self, ctx_id, det_size):
-                    self.det_size = det_size
-
-                    # Initialize detector (RetinaFace or SCRFD)
-                    try:
-                        self.det_model = model_zoo.get_model("retinaface_r50_v1")
-                    except:
-                        try:
-                            self.det_model = model_zoo.get_model("scrfd_10g_bnkps")
-                        except:
-                            # Try to find any available detection model
-                            self.det_model = model_zoo.get_model("scrfd_500m_bnkps")
-
-                    if ctx_id >= 0:
-                        self.det_model.prepare(ctx_id)
-
-                    # Initialize recognition model (ArcFace)
-                    try:
-                        self.rec_model = model_zoo.get_model("buffalo_l")
-                    except:
-                        try:
-                            self.rec_model = model_zoo.get_model("buffalo_s")
-                        except:
-                            logger.warning("Could not load recognition model")
-
-                def get(self, img):
-                    if self.det_model is None:
-                        return []
-
-                    bboxes, landmarks = self.det_model.detect(
-                        img, threshold=0.5, input_size=self.det_size
-                    )
-                    if bboxes.shape[0] == 0:
-                        return []
-
-                    faces = []
-                    for i in range(bboxes.shape[0]):
-                        bbox = bboxes[i, 0:4]
-                        det_score = bboxes[i, 4]
-                        landmark = landmarks[i]
-
-                        face = self.Face(
-                            bbox=bbox, landmark=landmark, det_score=det_score
-                        )
-                        if self.rec_model is not None:
-                            face.embedding = self.rec_model.get_embedding(img, face)
-                        faces.append(face)
-
-                    return faces
-
-            # Create the simplified face analysis instance
-            self.app = SimpleFaceAnalysis(
+            self.app = FaceAnalysis(
                 name=self.model_name,
                 providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
             )
             self.app.prepare(ctx_id=self.ctx_id, det_size=self.det_size)
-            logger.info(
-                f"Initialized fixed face detector with model: {self.model_name}"
-            )
-
+            logger.info(f"Initialized face detector with model: {self.model_name}")
         except Exception as e:
-            logger.error(f"Error initializing fixed face detector: {e}")
-            logger.info("Trying fallback to directly load detection models...")
-
-            try:
-                # Fallback to directly loading models
-                self._initialize_models_fallback()
-            except Exception as e2:
-                logger.error(f"Error with fallback initialization: {e2}")
-                raise RuntimeError(
-                    "Failed to initialize face detection. Please check the error logs."
-                )
-
-    def _initialize_models_fallback(self):
-        """Fallback method to initialize models directly using ONNX runtime."""
-        # This is a simplified implementation that directly loads ONNX models
-        logger.warning("Using fallback implementation with direct ONNX model loading")
-
-        # Create a basic Face class
-        class BasicFace:
-            def __init__(self, bbox, det_score=0.0, landmark=None, embedding=None):
-                self.bbox = bbox  # [x1, y1, x2, y2]
-                self.det_score = det_score
-                self.landmark = landmark
-                self.embedding = embedding
-
-        # Set up the app with basic functionality
-        class BasicApp:
-            def __init__(self):
-                self.det_model = None
-                self.rec_model = None
-
-            def get(self, img):
-                # Very basic detection - just a placeholder
-                # In real implementation, this would use ONNX models to detect faces
-                h, w = img.shape[:2]
-                # Return a fake face in the center of the image for demonstration
-                face = BasicFace(
-                    bbox=np.array([w / 4, h / 4, w * 3 / 4, h * 3 / 4]),
-                    det_score=0.9,
-                    # Create a simple embedding of zeros
-                    embedding=np.zeros(512),
-                )
-                return [face]
-
-        self.app = BasicApp()
-        logger.warning("Using extremely basic face detection fallback")
+            logger.error(f"Error initializing face detector: {e}")
+            raise
 
     def detect_faces(self, img):
         """
@@ -191,7 +74,6 @@ class FaceDetector:
             logger.error(f"Error detecting faces: {e}")
             return []
 
-    # ...existing code...
     def get_largest_face(self, img):
         """
         Get the largest face in an image.

@@ -1,0 +1,95 @@
+2025-05-17 01:43:34,396 - __main__ - ERROR - Error importing OpenCV detector: No module named 'src.face.opencv_detector'
+2025-05-17 01:43:37,057 - __main__ - INFO - Using fixed detector
+2025-05-17 01:43:37,465 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:43:37,487 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:43:37,493 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:43:37,498 - __main__ - INFO - Creating database...
+2025-05-17 01:43:38,618 - src.face.detector_fixed - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:43:38,618 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:43:38,618 - __main__ - INFO - Creating database from /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images
+2025-05-17 01:43:38,619 - __main__ - INFO - Using standard database
+2025-05-17 01:43:38,619 - __main__ - INFO - Found 26 person folders
+2025-05-17 01:43:38,626 - __main__ - INFO - Processing Rajkummar Rao's images...
+2025-05-17 01:43:40,607 - src.database.embeddings_db - INFO - Added identity: Rajkummar Rao with 3 images
+2025-05-17 01:43:40,608 - __main__ - INFO - Added Rajkummar Rao to database with 3 images
+2025-05-17 01:43:40,608 - __main__ - INFO - Processing Salman Khan's images...
+2025-05-17 01:43:42,627 - src.database.embeddings_db - INFO - Added identity: Salman Khan with 3 images
+2025-05-17 01:43:42,627 - __main__ - INFO - Added Salman Khan to database with 3 images
+2025-05-17 01:43:42,627 - __main__ - INFO - Processing Shah Rukh Khan's images...
+2025-05-17 01:43:44,423 - src.database.embeddings_db - INFO - Added identity: Shah Rukh Khan with 3 images
+2025-05-17 01:43:44,423 - __main__ - INFO - Added Shah Rukh Khan to database with 3 images
+2025-05-17 01:43:44,423 - __main__ - INFO - Processing Sachin Tendulkar's images...
+2025-05-17 01:43:45,030 - src.utils.image - WARNING - Failed to read image: /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images/Sachin Tendulkar/Sachin Tendulkar_2.jpg
+2025-05-17 01:43:45,606 - src.database.embeddings_db - INFO - Added identity: Sachin Tendulkar with 2 images
+2025-05-17 01:43:45,607 - __main__ - INFO - Added Sachin Tendulkar to database with 2 images
+2025-05-17 01:43:45,608 - __main__ - INFO - Processing shubham's images...
+2025-05-17 01:43:47,474 - src.database.embeddings_db - INFO - Added identity: shubham with 3 images
+2025-05-17 01:43:47,474 - __main__ - INFO - Added shubham to database with 3 images
+2025-05-17 01:43:47,475 - __main__ - INFO - Processing Sania Mirza's images...
+2025-05-17 01:43:49,216 - src.database.embeddings_db - INFO - Added identity: Sania Mirza with 3 images
+2025-05-17 01:43:49,216 - __main__ - INFO - Added Sania Mirza to database with 3 images
+2025-05-17 01:43:49,216 - __main__ - INFO - Processing Ranveer Singh's images...
+2025-05-17 01:43:50,321 - src.database.embeddings_db - INFO - Added identity: Ranveer Singh with 2 images
+2025-05-17 01:43:50,321 - __main__ - INFO - Added Ranveer Singh to database with 2 images
+2025-05-17 01:43:50,321 - __main__ - INFO - Processing Rohit Sharma's images...
+2025-05-17 01:43:52,391 - src.database.embeddings_db - INFO - Added identity: Rohit Sharma with 3 images
+2025-05-17 01:43:52,392 - __main__ - INFO - Added Rohit Sharma to database with 3 images
+2025-05-17 01:43:52,393 - __main__ - INFO - Processing Rekha's images...
+2025-05-17 01:43:52,394 - src.utils.image - WARNING - Failed to read image: /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images/Rekha/Rekha_1.jpg
+2025-05-17 01:43:53,638 - src.database.embeddings_db - INFO - Added identity: Rekha with 2 images
+2025-05-17 01:43:53,639 - __main__ - INFO - Added Rekha to database with 2 images
+2025-05-17 01:43:53,639 - __main__ - INFO - Processing Virat Kohli's images...
+2025-05-17 01:43:55,589 - src.database.embeddings_db - INFO - Added identity: Virat Kohli with 3 images
+2025-05-17 01:43:55,589 - __main__ - INFO - Added Virat Kohli to database with 3 images
+2025-05-17 01:43:55,589 - __main__ - INFO - Processing Sourav Ganguly's images...
+2025-05-17 01:44:00,427 - src.database.embeddings_db - INFO - Added identity: Sourav Ganguly with 3 images
+2025-05-17 01:44:00,427 - __main__ - INFO - Added Sourav Ganguly to database with 3 images
+2025-05-17 01:44:00,427 - __main__ - INFO - Processing Rajinikanth's images...
+2025-05-17 01:44:05,889 - src.database.embeddings_db - INFO - Added identity: Rajinikanth with 3 images
+2025-05-17 01:44:05,890 - __main__ - INFO - Added Rajinikanth to database with 3 images
+2025-05-17 01:44:05,891 - __main__ - INFO - Processing Suraj's images...
+2025-05-17 01:44:08,738 - src.database.embeddings_db - INFO - Added identity: Suraj with 4 images
+2025-05-17 01:44:08,738 - __main__ - INFO - Added Suraj to database with 4 images
+2025-05-17 01:44:08,738 - __main__ - INFO - Processing Rahul Dravid's images...
+2025-05-17 01:44:10,597 - src.database.embeddings_db - INFO - Added identity: Rahul Dravid with 3 images
+2025-05-17 01:44:10,597 - __main__ - INFO - Added Rahul Dravid to database with 3 images
+2025-05-17 01:44:10,597 - __main__ - INFO - Processing Vidya Balan's images...
+2025-05-17 01:44:12,437 - src.database.embeddings_db - INFO - Added identity: Vidya Balan with 3 images
+2025-05-17 01:44:12,437 - __main__ - INFO - Added Vidya Balan to database with 3 images
+2025-05-17 01:44:12,438 - __main__ - INFO - Processing Ranbir Kapoor's images...
+2025-05-17 01:44:15,529 - src.database.embeddings_db - INFO - Added identity: Ranbir Kapoor with 3 images
+2025-05-17 01:44:15,529 - __main__ - INFO - Added Ranbir Kapoor to database with 3 images
+2025-05-17 01:44:15,530 - __main__ - INFO - Processing Sunil Chhetri's images...
+2025-05-17 01:44:17,424 - src.database.embeddings_db - INFO - Added identity: Sunil Chhetri with 3 images
+2025-05-17 01:44:17,424 - __main__ - INFO - Added Sunil Chhetri to database with 3 images
+2025-05-17 01:44:17,425 - __main__ - INFO - Processing Sonam Kapoor's images...
+2025-05-17 01:44:19,450 - src.database.embeddings_db - INFO - Added identity: Sonam Kapoor with 3 images
+2025-05-17 01:44:19,451 - __main__ - INFO - Added Sonam Kapoor to database with 3 images
+2025-05-17 01:44:19,451 - __main__ - INFO - Processing Sridevi's images...
+2025-05-17 01:44:21,383 - src.database.embeddings_db - INFO - Added identity: Sridevi with 3 images
+2025-05-17 01:44:21,383 - __main__ - INFO - Added Sridevi to database with 3 images
+2025-05-17 01:44:21,383 - __main__ - INFO - Processing vipin's images...
+2025-05-17 01:44:24,885 - src.database.embeddings_db - INFO - Added identity: vipin with 5 images
+2025-05-17 01:44:24,886 - __main__ - INFO - Added vipin to database with 5 images
+2025-05-17 01:44:24,891 - __main__ - INFO - Processing Saina Nehwal's images...
+2025-05-17 01:44:28,005 - src.database.embeddings_db - INFO - Added identity: Saina Nehwal with 3 images
+2025-05-17 01:44:28,006 - __main__ - INFO - Added Saina Nehwal to database with 3 images
+2025-05-17 01:44:28,007 - __main__ - INFO - Processing Rani Mukerji's images...
+2025-05-17 01:44:29,665 - src.database.embeddings_db - INFO - Added identity: Rani Mukerji with 2 images
+2025-05-17 01:44:29,665 - __main__ - INFO - Added Rani Mukerji to database with 2 images
+2025-05-17 01:44:29,666 - __main__ - INFO - Processing Sushmita Sen's images...
+2025-05-17 01:44:31,946 - src.database.embeddings_db - INFO - Added identity: Sushmita Sen with 3 images
+2025-05-17 01:44:31,947 - __main__ - INFO - Added Sushmita Sen to database with 3 images
+2025-05-17 01:44:31,947 - __main__ - INFO - Processing Vijay's images...
+2025-05-17 01:44:33,995 - src.database.embeddings_db - INFO - Added identity: Vijay with 3 images
+2025-05-17 01:44:33,996 - __main__ - INFO - Added Vijay to database with 3 images
+2025-05-17 01:44:33,996 - __main__ - INFO - Processing PV Sindhu's images...
+2025-05-17 01:44:39,189 - src.database.embeddings_db - INFO - Added identity: PV Sindhu with 3 images
+2025-05-17 01:44:39,189 - __main__ - INFO - Added PV Sindhu to database with 3 images
+2025-05-17 01:44:39,190 - __main__ - INFO - Processing Rahul Gandhi's images...
+2025-05-17 01:44:41,266 - src.database.embeddings_db - INFO - Added identity: Rahul Gandhi with 3 images
+2025-05-17 01:44:41,266 - __main__ - INFO - Added Rahul Gandhi to database with 3 images
+2025-05-17 01:44:41,267 - src.database.embeddings_db - INFO - Saved database with 26 identities
+2025-05-17 01:44:41,268 - __main__ - INFO - Database created with 26 identities
+2025-05-17 01:44:41,268 - __main__ - INFO - Identities: Rajkummar Rao, Salman Khan, Shah Rukh Khan, Sachin Tendulkar, shubham, Sania Mirza, Ranveer Singh, Rohit Sharma, Rekha, Virat Kohli, Sourav Ganguly, Rajinikanth, Suraj, Rahul Dravid, Vidya Balan, Ranbir Kapoor, Sunil Chhetri, Sonam Kapoor, Sridevi, vipin, Saina Nehwal, Rani Mukerji, Sushmita Sen, Vijay, PV Sindhu, Rahul Gandhi
+2025-05-17 01:44:41,304 - __main__ - INFO - Database creation completed
