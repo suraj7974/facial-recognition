@@ -1,0 +1,20 @@
+2025-05-17 01:25:41,471 - __main__ - INFO - Using OpenCV detector
+2025-05-17 01:25:41,477 - src.access_control.verifier - INFO - Using OpenCV detector
+2025-05-17 01:25:42,120 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:25:42,145 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:25:42,152 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:25:42,156 - __main__ - INFO - Testing recognition...
+2025-05-17 01:25:42,186 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-05-17 01:25:42,186 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:25:42,187 - src.database.embeddings_db - INFO - Loaded database with 53 identities
+2025-05-17 01:25:42,187 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:25:42,401 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5429
+2025-05-17 01:25:42,401 - __main__ - INFO - Recognized as Suraj with score 0.5429 in 0.196s
+2025-05-17 01:25:42,402 - __main__ - INFO - Top matches:
+2025-05-17 01:25:42,402 - __main__ - INFO -   Suraj: 0.5429
+2025-05-17 01:25:42,402 - __main__ - INFO -   Kamal Haasan: 0.0730
+2025-05-17 01:25:42,402 - __main__ - INFO -   Hardik Pandya: 0.0617
+2025-05-17 01:25:42,402 - __main__ - INFO -   Aamir Khan: 0.0568
+2025-05-17 01:25:42,402 - __main__ - INFO -   vipin: 0.0540
+2025-05-17 01:25:42,605 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.5429
+2025-05-17 01:25:48,530 - __main__ - INFO - Testing completed

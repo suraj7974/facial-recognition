@@ -1,0 +1,19 @@
+2025-05-17 01:27:41,339 - __main__ - INFO - Using OpenCV detector
+2025-05-17 01:27:44,388 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:27:44,411 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:27:44,417 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:27:44,421 - __main__ - INFO - Testing recognition...
+2025-05-17 01:27:46,177 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:27:46,177 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:27:46,179 - src.database.embeddings_db - INFO - Loaded database with 54 identities
+2025-05-17 01:27:46,179 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:27:46,835 - src.access_control.verifier - INFO - Access GRANTED - Person: suraj, Score: 0.8307
+2025-05-17 01:27:46,836 - __main__ - INFO - Recognized as suraj with score 0.8307 in 0.644s
+2025-05-17 01:27:46,836 - __main__ - INFO - Top matches:
+2025-05-17 01:27:46,837 - __main__ - INFO -   suraj: 0.8307
+2025-05-17 01:27:46,837 - __main__ - INFO -   shubham: 0.2613
+2025-05-17 01:27:46,837 - __main__ - INFO -   Dhanush: 0.2122
+2025-05-17 01:27:46,838 - __main__ - INFO -   Priyanka Chopra: 0.1926
+2025-05-17 01:27:46,838 - __main__ - INFO -   mayank: 0.1828
+2025-05-17 01:27:47,557 - src.access_control.verifier - INFO - Access GRANTED - Person: suraj, Score: 0.8307
+2025-05-17 01:27:48,843 - __main__ - INFO - Testing completed

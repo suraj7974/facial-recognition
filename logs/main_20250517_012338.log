@@ -1,0 +1,11 @@
+2025-05-17 01:23:38,731 - __main__ - INFO - Using OpenCV detector
+2025-05-17 01:23:41,344 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 01:23:41,365 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 01:23:41,370 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 01:23:41,373 - __main__ - INFO - Creating database...
+2025-05-17 01:23:41,405 - src.face.opencv_detector - INFO - Initialized OpenCV Haar Cascade face detector
+2025-05-17 01:23:41,405 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:23:41,405 - __main__ - INFO - Creating database from /celeb_images
+2025-05-17 01:23:41,405 - __main__ - INFO - Using standard database
+2025-05-17 01:23:41,405 - __main__ - ERROR - Root folder does not exist: /celeb_images
+2025-05-17 01:23:41,405 - __main__ - INFO - Database creation completed
