@@ -1,0 +1,114 @@
+2025-05-17 01:57:18,416 - __main__ - INFO - Testing recognition...
+2025-05-17 01:57:19,269 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 01:57:19,270 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 01:57:19,270 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 01:57:19,270 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 01:57:19,888 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.8756
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO - Recognized as Suraj with score 0.8756 in 0.616s
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO - Top matches:
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO -   Suraj: 0.8756
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO -   shubham: 0.2714
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO -   Vijay: 0.1200
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO -   Rajinikanth: 0.0766
+2025-05-17 01:57:19,889 - tools.test_recognition - INFO -   vipin: 0.0706
+2025-05-17 01:57:20,441 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.8756
+2025-05-17 01:57:21,484 - __main__ - INFO - Testing completed
+2025-05-17 02:03:08,428 - __main__ - INFO - Creating database...
+2025-05-17 02:03:09,330 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 02:03:09,330 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 02:03:09,330 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 02:03:09,331 - tools.create_database - INFO - Creating database from /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images
+2025-05-17 02:03:09,331 - tools.create_database - INFO - Using standard database
+2025-05-17 02:03:09,331 - tools.create_database - INFO - Found 26 person folders
+2025-05-17 02:03:09,332 - tools.create_database - INFO - Processing Rajkummar Rao's images...
+2025-05-17 17:44:20,152 - __main__ - INFO - Creating database...
+2025-05-17 17:44:21,170 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 17:44:21,170 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 17:44:21,170 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 17:44:21,171 - tools.create_database - INFO - Creating database from /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images
+2025-05-17 17:44:21,171 - tools.create_database - INFO - Using standard database
+2025-05-17 17:44:21,171 - tools.create_database - INFO - Found 26 person folders
+2025-05-17 17:44:21,172 - tools.create_database - INFO - Processing Rajkummar Rao's images...
+2025-05-17 17:44:23,362 - src.database.embeddings_db - INFO - Added identity: Rajkummar Rao with 3 images
+2025-05-17 17:44:23,363 - tools.create_database - INFO - Added Rajkummar Rao to database with 3 images
+2025-05-17 17:44:23,363 - tools.create_database - INFO - Processing Salman Khan's images...
+2025-05-17 17:44:25,178 - src.database.embeddings_db - INFO - Added identity: Salman Khan with 3 images
+2025-05-17 17:44:25,178 - tools.create_database - INFO - Added Salman Khan to database with 3 images
+2025-05-17 17:44:25,184 - tools.create_database - INFO - Processing Shah Rukh Khan's images...
+2025-05-17 17:44:27,114 - src.database.embeddings_db - INFO - Added identity: Shah Rukh Khan with 3 images
+2025-05-17 17:44:27,114 - tools.create_database - INFO - Added Shah Rukh Khan to database with 3 images
+2025-05-17 17:44:27,114 - tools.create_database - INFO - Processing Sachin Tendulkar's images...
+2025-05-17 17:44:27,734 - src.utils.image - WARNING - Failed to read image: /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images/Sachin Tendulkar/Sachin Tendulkar_2.jpg
+2025-05-17 17:44:28,346 - src.database.embeddings_db - INFO - Added identity: Sachin Tendulkar with 2 images
+2025-05-17 17:44:28,346 - tools.create_database - INFO - Added Sachin Tendulkar to database with 2 images
+2025-05-17 17:44:28,346 - tools.create_database - INFO - Processing shubham's images...
+2025-05-17 17:44:30,272 - src.database.embeddings_db - INFO - Added identity: shubham with 3 images
+2025-05-17 17:44:30,273 - tools.create_database - INFO - Added shubham to database with 3 images
+2025-05-17 17:44:30,278 - tools.create_database - INFO - Processing Sania Mirza's images...
+2025-05-17 17:44:32,606 - src.database.embeddings_db - INFO - Added identity: Sania Mirza with 3 images
+2025-05-17 17:44:32,606 - tools.create_database - INFO - Added Sania Mirza to database with 3 images
+2025-05-17 17:44:32,607 - tools.create_database - INFO - Processing Ranveer Singh's images...
+2025-05-17 17:44:34,022 - src.database.embeddings_db - INFO - Added identity: Ranveer Singh with 2 images
+2025-05-17 17:44:34,023 - tools.create_database - INFO - Added Ranveer Singh to database with 2 images
+2025-05-17 17:44:34,023 - tools.create_database - INFO - Processing Rohit Sharma's images...
+2025-05-17 17:44:36,273 - src.database.embeddings_db - INFO - Added identity: Rohit Sharma with 3 images
+2025-05-17 17:44:36,273 - tools.create_database - INFO - Added Rohit Sharma to database with 3 images
+2025-05-17 17:44:36,274 - tools.create_database - INFO - Processing Rekha's images...
+2025-05-17 17:44:36,279 - src.utils.image - WARNING - Failed to read image: /run/media/suraj/JARVIS/Codebase/faceial-api-backup/celeb_images/Rekha/Rekha_1.jpg
+2025-05-17 17:44:37,969 - src.database.embeddings_db - INFO - Added identity: Rekha with 2 images
+2025-05-17 17:44:37,969 - tools.create_database - INFO - Added Rekha to database with 2 images
+2025-05-17 17:44:37,970 - tools.create_database - INFO - Processing Virat Kohli's images...
+2025-05-17 17:44:40,148 - src.database.embeddings_db - INFO - Added identity: Virat Kohli with 3 images
+2025-05-17 17:44:40,148 - tools.create_database - INFO - Added Virat Kohli to database with 3 images
+2025-05-17 17:44:40,149 - tools.create_database - INFO - Processing Sourav Ganguly's images...
+2025-05-17 17:44:45,097 - src.database.embeddings_db - INFO - Added identity: Sourav Ganguly with 3 images
+2025-05-17 17:44:45,097 - tools.create_database - INFO - Added Sourav Ganguly to database with 3 images
+2025-05-17 17:44:45,098 - tools.create_database - INFO - Processing Rajinikanth's images...
+2025-05-17 17:44:52,648 - src.database.embeddings_db - INFO - Added identity: Rajinikanth with 3 images
+2025-05-17 17:44:52,648 - tools.create_database - INFO - Added Rajinikanth to database with 3 images
+2025-05-17 17:44:52,649 - tools.create_database - INFO - Processing Suraj's images...
+2025-05-17 17:44:56,027 - src.database.embeddings_db - INFO - Added identity: Suraj with 4 images
+2025-05-17 17:44:56,027 - tools.create_database - INFO - Added Suraj to database with 4 images
+2025-05-17 17:44:56,033 - tools.create_database - INFO - Processing Rahul Dravid's images...
+2025-05-17 17:44:58,242 - src.database.embeddings_db - INFO - Added identity: Rahul Dravid with 3 images
+2025-05-17 17:44:58,242 - tools.create_database - INFO - Added Rahul Dravid to database with 3 images
+2025-05-17 17:44:58,243 - tools.create_database - INFO - Processing Vidya Balan's images...
+2025-05-17 17:45:00,434 - src.database.embeddings_db - INFO - Added identity: Vidya Balan with 3 images
+2025-05-17 17:45:00,434 - tools.create_database - INFO - Added Vidya Balan to database with 3 images
+2025-05-17 17:45:00,435 - tools.create_database - INFO - Processing Ranbir Kapoor's images...
+2025-05-17 17:45:04,093 - src.database.embeddings_db - INFO - Added identity: Ranbir Kapoor with 3 images
+2025-05-17 17:45:04,093 - tools.create_database - INFO - Added Ranbir Kapoor to database with 3 images
+2025-05-17 17:45:04,094 - tools.create_database - INFO - Processing Sunil Chhetri's images...
+2025-05-17 17:45:06,317 - src.database.embeddings_db - INFO - Added identity: Sunil Chhetri with 3 images
+2025-05-17 17:45:06,318 - tools.create_database - INFO - Added Sunil Chhetri to database with 3 images
+2025-05-17 17:45:06,318 - tools.create_database - INFO - Processing Sonam Kapoor's images...
+2025-05-17 17:45:08,568 - src.database.embeddings_db - INFO - Added identity: Sonam Kapoor with 3 images
+2025-05-17 17:45:08,568 - tools.create_database - INFO - Added Sonam Kapoor to database with 3 images
+2025-05-17 17:45:08,568 - tools.create_database - INFO - Processing Sridevi's images...
+2025-05-17 17:45:10,857 - src.database.embeddings_db - INFO - Added identity: Sridevi with 3 images
+2025-05-17 17:45:10,857 - tools.create_database - INFO - Added Sridevi to database with 3 images
+2025-05-17 17:45:10,857 - tools.create_database - INFO - Processing vipin's images...
+2025-05-17 17:45:14,476 - src.database.embeddings_db - INFO - Added identity: vipin with 5 images
+2025-05-17 17:45:14,476 - tools.create_database - INFO - Added vipin to database with 5 images
+2025-05-17 17:45:14,476 - tools.create_database - INFO - Processing Saina Nehwal's images...
+2025-05-17 17:45:18,096 - src.database.embeddings_db - INFO - Added identity: Saina Nehwal with 3 images
+2025-05-17 17:45:18,096 - tools.create_database - INFO - Added Saina Nehwal to database with 3 images
+2025-05-17 17:45:18,097 - tools.create_database - INFO - Processing Rani Mukerji's images...
+2025-05-17 17:45:19,987 - src.database.embeddings_db - INFO - Added identity: Rani Mukerji with 2 images
+2025-05-17 17:45:19,988 - tools.create_database - INFO - Added Rani Mukerji to database with 2 images
+2025-05-17 17:45:19,988 - tools.create_database - INFO - Processing Sushmita Sen's images...
+2025-05-17 17:45:22,209 - src.database.embeddings_db - INFO - Added identity: Sushmita Sen with 3 images
+2025-05-17 17:45:22,209 - tools.create_database - INFO - Added Sushmita Sen to database with 3 images
+2025-05-17 17:45:22,210 - tools.create_database - INFO - Processing Vijay's images...
+2025-05-17 17:45:24,445 - src.database.embeddings_db - INFO - Added identity: Vijay with 3 images
+2025-05-17 17:45:24,445 - tools.create_database - INFO - Added Vijay to database with 3 images
+2025-05-17 17:45:24,446 - tools.create_database - INFO - Processing PV Sindhu's images...
+2025-05-17 17:45:30,588 - src.database.embeddings_db - INFO - Added identity: PV Sindhu with 3 images
+2025-05-17 17:45:30,588 - tools.create_database - INFO - Added PV Sindhu to database with 3 images
+2025-05-17 17:45:30,589 - tools.create_database - INFO - Processing Rahul Gandhi's images...
+2025-05-17 17:45:32,442 - src.database.embeddings_db - INFO - Added identity: Rahul Gandhi with 3 images
+2025-05-17 17:45:32,442 - tools.create_database - INFO - Added Rahul Gandhi to database with 3 images
+2025-05-17 17:45:32,444 - src.database.embeddings_db - INFO - Saved database with 26 identities
+2025-05-17 17:45:32,444 - tools.create_database - INFO - Database created with 26 identities
+2025-05-17 17:45:32,444 - tools.create_database - INFO - Identities: Rajkummar Rao, Salman Khan, Shah Rukh Khan, Sachin Tendulkar, shubham, Sania Mirza, Ranveer Singh, Rohit Sharma, Rekha, Virat Kohli, Sourav Ganguly, Rajinikanth, Suraj, Rahul Dravid, Vidya Balan, Ranbir Kapoor, Sunil Chhetri, Sonam Kapoor, Sridevi, vipin, Saina Nehwal, Rani Mukerji, Sushmita Sen, Vijay, PV Sindhu, Rahul Gandhi
+2025-05-17 17:45:32,469 - __main__ - INFO - Database creation completed

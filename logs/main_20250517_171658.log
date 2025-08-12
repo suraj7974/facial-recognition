@@ -1,0 +1,12 @@
+2025-05-17 17:16:58,128 - __main__ - INFO - Using OpenCV detector
+2025-05-17 17:17:00,395 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 17:17:00,415 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 17:17:00,421 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 17:17:00,425 - __main__ - INFO - Testing recognition...
+2025-05-17 17:17:01,763 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 17:17:01,763 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 17:17:01,769 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 17:17:01,769 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 17:17:01,769 - src.utils.image - WARNING - Image path does not exist: /home/suraj/Documents/WhatsApp Image 2025-05-16 at 9.23.36 PM.jpeg
+2025-05-17 17:17:01,769 - __main__ - ERROR - Failed to read image: /home/suraj/Documents/WhatsApp Image 2025-05-16 at 9.23.36 PM.jpeg
+2025-05-17 17:17:01,801 - __main__ - INFO - Testing completed

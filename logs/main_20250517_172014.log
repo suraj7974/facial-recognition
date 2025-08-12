@@ -1,0 +1,5 @@
+2025-05-17 17:20:14,633 - __main__ - ERROR - Error importing OpenCV detector: No module named 'src.face.opencv_detector'
+2025-05-17 17:20:16,580 - __main__ - INFO - Using fixed detector
+2025-05-17 17:20:16,911 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 17:20:16,929 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 17:20:16,934 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.

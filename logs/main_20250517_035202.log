@@ -1,0 +1,20 @@
+2025-05-17 03:52:02,467 - __main__ - ERROR - Error importing OpenCV detector: cannot import name 'FaceDetector' from 'src.face.opencv_detector' (/run/media/suraj/JARVIS/Codebase/faceial-api-backup/src/face/opencv_detector.py)
+2025-05-17 03:52:05,090 - __main__ - INFO - Using fixed detector
+2025-05-17 03:52:05,524 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-17 03:52:05,546 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-17 03:52:05,553 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-17 03:52:05,556 - __main__ - INFO - Testing recognition...
+2025-05-17 03:52:07,252 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-17 03:52:07,258 - src.face.embedder - INFO - Initialized face embedder
+2025-05-17 03:52:07,259 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-17 03:52:07,260 - src.access_control.verifier - INFO - Initialized access verifier with standard database
+2025-05-17 03:52:07,873 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.7623
+2025-05-17 03:52:07,874 - __main__ - INFO - Recognized as Suraj with score 0.7623 in 0.608s
+2025-05-17 03:52:07,879 - __main__ - INFO - Top matches:
+2025-05-17 03:52:07,879 - __main__ - INFO -   Suraj: 0.7623
+2025-05-17 03:52:07,879 - __main__ - INFO -   shubham: 0.1555
+2025-05-17 03:52:07,879 - __main__ - INFO -   Ranveer Singh: 0.0991
+2025-05-17 03:52:07,879 - __main__ - INFO -   Vijay: 0.0905
+2025-05-17 03:52:07,879 - __main__ - INFO -   Saina Nehwal: 0.0795
+2025-05-17 03:52:08,518 - src.access_control.verifier - INFO - Access GRANTED - Person: Suraj, Score: 0.7623
+2025-05-17 03:52:09,760 - __main__ - INFO - Testing completed

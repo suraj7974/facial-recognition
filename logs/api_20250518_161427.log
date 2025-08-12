@@ -1,0 +1,12 @@
+2025-05-18 16:14:30,175 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-18 16:14:30,200 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-18 16:14:30,210 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-18 16:14:32,078 - src.face.detector - INFO - Initialized face detector with model: buffalo_l
+2025-05-18 16:14:32,079 - src.face.embedder - INFO - Initialized face embedder
+2025-05-18 16:14:32,079 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-18 16:14:32,080 - __main__ - INFO - Database loaded with 26 identities
+2025-05-18 16:14:32,082 - __main__ - INFO - Starting API server on 0.0.0.0:5000 in development mode
+2025-05-18 16:14:32,083 - __main__ - INFO - Verifying detector initialization...
+2025-05-18 16:14:32,083 - __main__ - INFO - Detector has required method: detect_faces
+2025-05-18 16:14:32,083 - __main__ - INFO - Detector has required method: get_largest_face
+2025-05-18 16:14:32,083 - __main__ - INFO - Detector has required method: draw_face_locations

@@ -1,0 +1,22 @@
+
+name: "Deploy"
+input: "data"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 300
+  dim: 300
+}
+layer {
+  name: "conv1_1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1_1"
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    pad: 1
+  }
+}
+# This is a minimal placeholder that won't actually work for detection
+# But will allow the code to run and find the model files

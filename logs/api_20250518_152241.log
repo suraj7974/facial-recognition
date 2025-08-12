@@ -1,0 +1,18 @@
+2025-05-18 15:22:41,726 - __main__ - INFO - Using OpenCV detector
+2025-05-18 15:22:42,688 - faiss.loader - INFO - Loading faiss with AVX512 support.
+2025-05-18 15:22:42,762 - faiss.loader - INFO - Successfully loaded faiss with AVX512 support.
+2025-05-18 15:22:42,768 - faiss - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-05-18 15:22:42,771 - src.face.opencv_detector - WARNING - Model file /run/media/suraj/JARVIS/Codebase/faceial-api-backup/src/models/res10_300x300_ssd_iter_140000.caffemodel not found. Using Haar Cascade as fallback.
+2025-05-18 15:22:42,803 - src.face.opencv_detector - INFO - Using OpenCV Haar Cascade from /run/media/suraj/EDITH/anaconda3/envs/bib/lib/python3.10/site-packages/cv2/data/haarcascade_frontalface_default.xml
+2025-05-18 15:22:42,803 - src.face.opencv_detector - INFO - Initialized OpenCV fallback detector with threshold 0.6
+2025-05-18 15:22:42,803 - src.face.embedder - INFO - Initialized face embedder
+2025-05-18 15:22:42,804 - src.database.embeddings_db - INFO - Loaded database with 26 identities
+2025-05-18 15:22:42,804 - __main__ - INFO - Database loaded with 26 identities
+2025-05-18 15:22:42,806 - __main__ - INFO - Starting API server on 0.0.0.0:5000 in development mode
+2025-05-18 15:22:42,807 - __main__ - INFO - Verifying detector initialization...
+2025-05-18 15:22:42,807 - __main__ - INFO - Detector has required method: detect_faces
+2025-05-18 15:22:42,807 - __main__ - INFO - Detector has required method: get_largest_face
+2025-05-18 15:22:42,807 - __main__ - INFO - Detector has required method: draw_face_locations
+2025-05-18 15:22:42,810 - werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-05-18 15:22:42,810 - werkzeug - INFO -  * Running on http://192.168.218.77:5000/ (Press CTRL+C to quit)

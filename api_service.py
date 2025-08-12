@@ -38,21 +38,7 @@ logger = logging.getLogger(__name__)
 # Import from our modules
 from config import settings
 
-try:
-    from src.face.opencv_detector import FaceDetector
-
-    logger.info("Using OpenCV detector")
-except ImportError:
-    try:
-        from src.face.detector_fixed import FaceDetector
-
-        logger.info("Using fixed detector")
-    except ImportError:
-        logger.error(
-            "Could not import any detector! Please run fix_dependencies.py first."
-        )
-        sys.exit(1)
-
+from src.face.detector import FaceDetector
 from src.face.embedder import FaceEmbedder
 from src.database.embeddings_db import EmbeddingsDatabase
 from src.database.faiss_db import FaissDatabase
@@ -69,6 +55,18 @@ app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # Limit uploads to 16MB
 
 # Initialize components
 detector = FaceDetector(detection_threshold=settings.DETECTION_THRESHOLD)
+
+# Verify detector has required methods
+required_methods = ["detect_faces", "get_largest_face", "draw_face_locations"]
+missing_methods = []
+for method in required_methods:
+    if not hasattr(detector, method):
+        missing_methods.append(method)
+        logger.error(f"Detector missing required method: {method}")
+
+if missing_methods:
+    logger.error(f"Detector is missing critical methods: {missing_methods}")
+    logger.error("API will likely fail. Please check your installation.")
 embedder = FaceEmbedder()
 
 # Initialize database (choose between FAISS and standard)
