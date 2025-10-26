@@ -51,7 +51,7 @@ class EmbeddingsDatabase:
         except Exception as e:
             logger.error(f"Error saving database: {e}")
     
-    def add_identity(self, identity_name, embedding, num_images=1):
+    def add_identity(self, identity_name, embedding, num_images=1, description=None):
         """
         Add identity to database.
         
@@ -59,6 +59,7 @@ class EmbeddingsDatabase:
             identity_name: Name of the person
             embedding: Face embedding vector
             num_images: Number of images used to create the embedding
+            description: Optional description/info about the person
         """
         if identity_name is None or embedding is None:
             logger.warning("Cannot add identity with empty name or embedding")
@@ -67,13 +68,14 @@ class EmbeddingsDatabase:
         self.database[identity_name] = {
             'embedding': embedding,
             'num_images': num_images,
+            'description': description,
             'created_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'updated_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
         
         logger.info(f"Added identity: {identity_name} with {num_images} images")
     
-    def update_identity(self, identity_name, embedding, num_images=1):
+    def update_identity(self, identity_name, embedding, num_images=1, description=None):
         """
         Update identity in database.
         
@@ -81,13 +83,16 @@ class EmbeddingsDatabase:
             identity_name: Name of the person
             embedding: Face embedding vector
             num_images: Number of images used to create the embedding
+            description: Optional description/info about the person
         """
         if identity_name not in self.database:
-            self.add_identity(identity_name, embedding, num_images)
+            self.add_identity(identity_name, embedding, num_images, description)
             return
         
         self.database[identity_name]['embedding'] = embedding
         self.database[identity_name]['num_images'] = num_images
+        if description is not None:
+            self.database[identity_name]['description'] = description
         self.database[identity_name]['updated_at'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         logger.info(f"Updated identity: {identity_name} with {num_images} images")
@@ -122,6 +127,22 @@ class EmbeddingsDatabase:
             return None
         
         return identity['embedding']
+    
+    def get_description(self, identity_name):
+        """
+        Get description for identity.
+        
+        Args:
+            identity_name: Name of the person
+        
+        Returns:
+            Description string or None if not found
+        """
+        identity = self.get_identity(identity_name)
+        if identity is None:
+            return None
+        
+        return identity.get('description', None)
     
     def remove_identity(self, identity_name):
         """

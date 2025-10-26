@@ -78,12 +78,9 @@ client.on('message', async (message) => {
           replyMessage += `🎯 *Confidence:* ${(apiResponse.confidence * 100).toFixed(2)}%\n`;
           replyMessage += `⏱️ *Processing Time:* ${apiResponse.processing_time.toFixed(2)}s\n`;
           
-          // Show top matches if available
-          if (apiResponse.top_matches && apiResponse.top_matches.length > 1) {
-            replyMessage += `\n📊 *Top Matches:*\n`;
-            apiResponse.top_matches.slice(0, 3).forEach((match, idx) => {
-              replyMessage += `${idx + 1}. ${match.name}: ${(match.score * 100).toFixed(2)}%\n`;
-            });
+          // Add description if available
+          if (apiResponse.description) {
+            replyMessage += `\n� *Description:*\n${apiResponse.description}\n`;
           }
         } else {
           // Face detected but not recognized (recognized field is false)

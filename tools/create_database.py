@@ -85,6 +85,33 @@ def create_database_from_folders(root_folder, db_path=None, use_faiss=False, min
         
         logger.info(f"Processing {person_name}'s images...")
         
+        # Read description file if it exists
+        description = None
+        info_txt_path = os.path.join(person_folder, 'info.txt')
+        info_json_path = os.path.join(person_folder, 'info.json')
+        
+        if os.path.exists(info_txt_path):
+            try:
+                with open(info_txt_path, 'r', encoding='utf-8') as f:
+                    description = f.read().strip()
+                logger.info(f"Found description file for {person_name}")
+            except Exception as e:
+                logger.warning(f"Failed to read description file for {person_name}: {e}")
+        elif os.path.exists(info_json_path):
+            try:
+                import json
+                with open(info_json_path, 'r', encoding='utf-8') as f:
+                    info_data = json.load(f)
+                # Format JSON data as a readable string
+                description_parts = []
+                for key, value in info_data.items():
+                    if key.lower() != 'name':  # Skip name field
+                        description_parts.append(f"{key.title()}: {value}")
+                description = '\n'.join(description_parts)
+                logger.info(f"Found JSON description file for {person_name}")
+            except Exception as e:
+                logger.warning(f"Failed to read JSON description file for {person_name}: {e}")
+        
         # Get list of image files
         image_files = [f for f in os.listdir(person_folder) 
                        if is_image_file(os.path.join(person_folder, f))]
@@ -134,7 +161,7 @@ def create_database_from_folders(root_folder, db_path=None, use_faiss=False, min
             continue
         
         # Add to database
-        db.add_identity(person_name, avg_embedding, valid_images)
+        db.add_identity(person_name, avg_embedding, valid_images, description)
         logger.info(f"Added {person_name} to database with {valid_images} images")
     
     # Save database

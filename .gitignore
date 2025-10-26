@@ -36,6 +36,7 @@ logs/
 
 # Images
 celeb_images/
+imgs/
 
 # Node.js
 node_modules/
@@ -48,3 +49,6 @@ npm-debug.log
 
 # Environment files
 .env
+
+
+data/

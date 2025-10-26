@@ -169,6 +169,11 @@ def process_image_recognition(image_data, recognition_threshold=None):
         # Match against database
         name, score = database.find_match(embedding, recognition_threshold)
 
+        # Get description if person is recognized
+        description = None
+        if name is not None:
+            description = database.get_description(name)
+
         # Get all similarity scores
         all_scores = database.get_all_similarity_scores(embedding)
         top_matches = sorted(all_scores.items(), key=lambda x: x[1], reverse=True)[:5]
@@ -182,6 +187,7 @@ def process_image_recognition(image_data, recognition_threshold=None):
             "recognized": name is not None,
             "person_name": name if name else "Unknown",
             "confidence": float(score),
+            "description": description,
             "face_bbox": bbox,
             "top_matches": [{"name": p, "score": float(s)} for p, s in top_matches],
             "processing_time": time.time() - start_time,
