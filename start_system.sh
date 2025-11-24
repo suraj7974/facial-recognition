@@ -12,18 +12,25 @@ echo ""
 # fi
 
 # Check if Node modules are installed
-if [ ! -d "node_modules" ]; then
+if [ ! -d "client/node_modules" ]; then
     echo "📦 Installing Node.js dependencies..."
-    npm install
+    (cd client && npm install)
     echo ""
 fi
 
 # Start the Flask API in background
 echo "🐍 Starting Flask API server..."
-source .venv/bin/activate
-python api_service.py &
+# source .venv/bin/activate
+python server/api_service.py &
 API_PID=$!
 echo "✅ API started (PID: $API_PID)"
+echo ""
+
+# Start the Admin server in background
+echo "⚙️ Starting Admin server..."
+python server/admin/admin.py &
+ADMIN_PID=$!
+echo "✅ Admin server started (PID: $ADMIN_PID)"
 echo ""
 
 # Wait a bit for API to start
@@ -33,7 +40,7 @@ echo ""
 
 # Start the WhatsApp bot
 echo "📱 Starting WhatsApp Bot..."
-node whatsapp_bot.js &
+node client/whatsapp_bot.js &
 BOT_PID=$!
 echo "✅ WhatsApp Bot started (PID: $BOT_PID)"
 echo ""
@@ -42,6 +49,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "✨ System is running!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "📍 API:        http://localhost:5000"
+echo "⚙️ Admin:      http://localhost:5001/admin.html"
 echo "📱 WhatsApp:   Scan QR code above"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
@@ -53,6 +61,7 @@ cleanup() {
     echo ""
     echo "🛑 Stopping services..."
     kill $API_PID 2>/dev/null
+    kill $ADMIN_PID 2>/dev/null
     kill $BOT_PID 2>/dev/null
     echo "✅ All services stopped"
     exit 0

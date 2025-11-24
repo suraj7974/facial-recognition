@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Face Recognition Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .sidebar a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        .sidebar a:hover, .sidebar .nav-link.active {
+            color: #fff;
+        }
+        .thumb {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+        }
+        pre.log {
+            background: #111;
+            color: #eee;
+            padding: 10px;
+            max-height: 40vh;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+        .person-card {
+            cursor: pointer;
+        }
+        .person-card:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 sidebar vh-100" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <i class="bi bi-person-circle fs-4 me-2"></i>
+                <span class="fs-4">Face Admin</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item"><a href="#" class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard-tab"><i class="bi bi-grid me-2"></i>Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-bs-toggle="tab" data-bs-target="#identities-tab"><i class="bi bi-people me-2"></i>Identities</a></li>
+                <li><a href="#" class="nav-link" data-bs-toggle="tab" data-bs-target="#enroll-tab"><i class="bi bi-person-plus me-2"></i>Enroll New</a></li>
+                <li><a href="#" class="nav-link" data-bs-toggle="tab" data-bs-target="#logs-tab"><i class="bi bi-card-text me-2"></i>Logs</a></li>
+            </ul>
+            <hr>
+            <div>
+                <small class="text-muted">DB (server-side): <code>celeb_images</code></small>
+            </div>
+        </div>
+
+        <div class="flex-grow-1 p-4">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="dashboard-tab">
+                    <h3>Dashboard</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-people-fill"></i> Total Identities</h5>
+                                    <p class="card-text fs-2" id="total-identities">0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="bi bi-card-checklist"></i> Last Log Update</h5>
+                                    <p class="card-text fs-5" id="last-log-update">N/A</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-4">
+                        <div class="card-header">System Actions</div>
+                        <div class="card-body">
+                            <button id="rebuildBtn" class="btn btn-warning"><i class="bi bi-hdd-stack"></i> Rebuild Database</button>
+                            <button id="clearLogsBtn" class="btn btn-danger"><i class="bi bi-trash"></i> Clear Logs (Not Implemented)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="identities-tab">
+                    <h3>Identities</h3>
+                    <div class="mb-3">
+                        <input type="text" id="search-identity" class="form-control" placeholder="Search by name...">
+                    </div>
+                    <div id="identities-list" class="row"></div>
+                </div>
+
+                <div class="tab-pane fade" id="enroll-tab">
+                    <h3>Enroll New Person</h3>
+                    <div class="card p-3">
+                        <form id="enrollForm">
+                            <div class="mb-3">
+                                <label for="enrollName" class="form-label">Person Name</label>
+                                <input id="enrollName" name="name" class="form-control" placeholder="Enter name" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="enrollInfo" class="form-label">Info (optional)</label>
+                                <textarea id="enrollInfo" name="info" class="form-control" placeholder="Add some details about the person"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="enrollFiles" class="form-label">Images</label>
+                                <input id="enrollFiles" name="images" type="file" multiple accept="image/*" class="form-control" required />
+                            </div>
+                            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Create & Upload</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="logs-tab">
+                    <h3>System Logs</h3>
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6>Latest Log</h6>
+                            <button id="refreshLog" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-repeat"></i> Refresh</button>
+                        </div>
+                        <pre id="log" class="log">No logs yet</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="alerts" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11"></div>
+
+    <!-- Person Detail Modal -->
+    <div class="modal fade" id="personModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="personModalTitle">Person Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <h6>Information</h6>
+            <pre id="personInfo" style="background: #f8f9fa; padding: 10px;"></pre>
+            <h6 class="mt-3">Images</h6>
+            <div id="personImages" class="row g-2"></div>
+            <hr>
+            <h6>Add Image</h6>
+            <form id="addForm">
+                <input type="hidden" id="addPersonName" name="person">
+                <div class="input-group">
+                    <input id="addFile" name="image" type="file" accept="image/*" class="form-control" required />
+                    <button class="btn btn-secondary">Add</button>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="deletePersonBtn" class="btn btn-danger"><i class="bi bi-trash"></i> Delete Person</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const api = {
+            identities: "/api/identities",
+            person: (name) => `/api/person/${encodeURIComponent(name)}`,
+            enroll: "/api/enroll",
+            add: "/api/add_image",
+            delete: "/api/delete_person",
+            rebuild: "/api/rebuild_db",
+            latest_log: "/api/latest_log",
+            images: (person, filename) => `/images/${encodeURIComponent(person)}/${encodeURIComponent(filename)}`,
+        };
+
+        const personModal = new bootstrap.Modal(document.getElementById('personModal'));
+
+        function showAlert(msg, type = "info", timeout = 5000) {
+            const wrapper = document.createElement('div')
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${msg}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>'
+            ].join('')
+            document.getElementById('alerts').append(wrapper)
+            if (timeout) setTimeout(() => wrapper.remove(), timeout);
+        }
+
+        async function loadIdentities() {
+            const res = await fetch(api.identities);
+            const data = await res.json();
+            const list = document.getElementById("identities-list");
+            list.innerHTML = "";
+            
+            const identities = data.identities || [];
+            document.getElementById('total-identities').textContent = identities.length;
+
+            if (identities.length === 0) {
+                list.innerHTML = '<p class="text-muted">No identities found.</p>';
+                return;
+            }
+
+            identities.sort((a, b) => a[0].localeCompare(b[0]));
+
+            identities.forEach(([name, count]) => {
+                const col = document.createElement("div");
+                col.className = "col-md-4 col-lg-3 mb-3";
+                col.innerHTML = `
+                    <div class="card person-card" onclick="showPerson('${name}')">
+                        <div class="card-body">
+                            <h5 class="card-title">${name}</h5>
+                            <p class="card-text text-muted">${count} image(s)</p>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(col);
+            });
+        }
+
+        async function showPerson(name) {
+            const res = await fetch(api.person(name));
+            if (!res.ok) {
+                showAlert("Failed to fetch person data", "danger");
+                return;
+            }
+            const data = await res.json();
+            document.getElementById("personModalTitle").textContent = name;
+            document.getElementById("personInfo").textContent = data.info || 'No information provided.';
+            
+            const imagesDiv = document.getElementById("personImages");
+            imagesDiv.innerHTML = "";
+            if (data.images && data.images.length > 0) {
+                data.images.forEach(img => {
+                    const imgCol = document.createElement("div");
+                    imgCol.className = "col-6 col-md-4";
+                    imgCol.innerHTML = `
+                        <div class="card">
+                            <img src="${api.images(name, img)}" class="thumb card-img-top">
+                            <div class="card-body p-2">
+                                <p class="small text-muted mb-0">${img}</p>
+                            </div>
+                        </div>
+                    `;
+                    imagesDiv.appendChild(imgCol);
+                });
+            } else {
+                imagesDiv.innerHTML = '<p class="text-muted">No images found for this person.</p>';
+            }
+
+            document.getElementById('addPersonName').value = name;
+            personModal.show();
+        }
+
+        document.getElementById('deletePersonBtn').onclick = async () => {
+            const name = document.getElementById('addPersonName').value;
+            if (!name || !confirm(`Are you sure you want to delete "${name}" permanently?`)) return;
+
+            const form = new FormData();
+            form.append('person', name);
+            const res = await fetch(api.delete, { method: "POST", body: form });
+            const j = await res.json();
+            if (j.success) {
+                showAlert(j.message, "success");
+                loadIdentities();
+                personModal.hide();
+            } else {
+                showAlert(j.error || "Delete failed", "danger");
+            }
+        };
+
+        document.getElementById('rebuildBtn').onclick = async () => {
+            if (!confirm("Rebuilding the database can take a long time. Continue?")) return;
+            showAlert("Starting database rebuild...", "info", 10000);
+            const res = await fetch(api.rebuild, { method: "POST" });
+            const j = await res.json();
+            if (j.success) {
+                showAlert("Database rebuild finished. Check logs for details.", "success");
+            } else {
+                showAlert("Rebuild failed: " + (j.error || "Unknown error"), "danger");
+            }
+            loadLog();
+        };
+
+        document.getElementById('enrollForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            const name = form.get('name').trim();
+            if (!name) {
+                showAlert("Person name cannot be empty.", "warning");
+                return;
+            }
+            const res = await fetch(api.enroll, { method: "POST", body: form });
+            const j = await res.json();
+            if (j.success) {
+                showAlert(j.message, "success");
+                e.target.reset();
+                loadIdentities();
+                // Switch to identities tab
+                const identitiesTab = new bootstrap.Tab(document.querySelector('a[data-bs-target="#identities-tab"]'));
+                identitiesTab.show();
+            } else {
+                showAlert(j.error || "Enrollment failed", "danger");
+            }
+        });
+
+        document.getElementById('addForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            const person = form.get('person').trim();
+            if (!person) {
+                showAlert("Person name is missing.", "danger");
+                return;
+            }
+            const res = await fetch(api.add, { method: "POST", body: form });
+            const j = await res.json();
+            if (j.success) {
+                showAlert(j.message, "success");
+                e.target.reset();
+                showPerson(person); // Refresh the modal
+                loadIdentities(); // Refresh the main list
+            } else {
+                showAlert(j.error || "Failed to add image", "danger");
+            }
+        });
+
+        document.getElementById('search-identity').addEventListener('input', e => {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('#identities-list .col-md-4');
+            cards.forEach(card => {
+                const name = card.querySelector('.card-title').textContent.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        async function loadLog() {
+            try {
+                const res = await fetch(api.latest_log);
+                const j = await res.json();
+                document.getElementById('log').textContent = j.content;
+                document.getElementById('last-log-update').textContent = new Date().toLocaleTimeString();
+            } catch (err) {
+                document.getElementById('log').textContent = "Error loading log.";
+                showAlert("Could not fetch logs from server.", "warning");
+            }
+        }
+        
+        document.getElementById('refreshLog').onclick = loadLog;
+
+        // Initial load
+        (async function init() {
+            await loadIdentities();
+            await loadLog();
+        })();
+    </script>
+</body>
+</html>

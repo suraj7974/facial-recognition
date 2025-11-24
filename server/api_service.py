@@ -58,14 +58,15 @@ detector = None
 embedder = None
 database = None
 
+
 def initialize_components():
     """Initialize components only when needed (lazy loading)."""
     global detector, embedder, database
-    
+
     if detector is None:
         logger.info("Initializing face detector...")
         detector = FaceDetector(detection_threshold=settings.DETECTION_THRESHOLD)
-        
+
         # Verify detector has required methods
         required_methods = ["detect_faces", "get_largest_face", "draw_face_locations"]
         missing_methods = []
@@ -77,7 +78,7 @@ def initialize_components():
         if missing_methods:
             logger.error(f"Detector is missing critical methods: {missing_methods}")
             raise Exception("Detector initialization failed")
-            
+
     if embedder is None:
         logger.info("Initializing face embedder...")
         embedder = FaceEmbedder()
@@ -95,12 +96,17 @@ def initialize_components():
         if db_info["num_identities"] == 0:
             if settings.IS_PRODUCTION:
                 logger.error("Database is empty in production environment!")
-                raise Exception("Database is empty. Please ensure face_db.pkl contains valid data.")
+                raise Exception(
+                    "Database is empty. Please ensure face_db.pkl contains valid data."
+                )
             else:
                 logger.warning("Database is empty. Please add identities first.")
-                raise Exception("Database is empty. Please ensure face_db.pkl contains valid data.")
+                raise Exception(
+                    "Database is empty. Please ensure face_db.pkl contains valid data."
+                )
         else:
             logger.info(f"Database loaded with {db_info['num_identities']} identities")
+
 
 # Initialize only the database at startup to check if it exists
 try:
@@ -108,10 +114,12 @@ try:
         database = FaissDatabase()
     else:
         database = EmbeddingsDatabase()
-    
+
     db_info = database.get_database_info()
     if db_info["num_identities"] == 0:
-        logger.warning("Database is empty. Face recognition will not work until models are loaded.")
+        logger.warning(
+            "Database is empty. Face recognition will not work until models are loaded."
+        )
     else:
         logger.info(f"Database ready with {db_info['num_identities']} identities")
 except Exception as e:
@@ -136,7 +144,7 @@ def process_image_recognition(image_data, recognition_threshold=None):
     try:
         # Initialize components only when needed (lazy loading)
         initialize_components()
-        
+
         # Start timing
         start_time = time.time()
 
@@ -311,8 +319,11 @@ def health_check():
     """Health check endpoint."""
     try:
         if database is None:
-            return jsonify({"status": "error", "error": "Database not initialized"}), 500
-            
+            return (
+                jsonify({"status": "error", "error": "Database not initialized"}),
+                500,
+            )
+
         db_info = database.get_database_info()
         return jsonify(
             {
@@ -331,16 +342,18 @@ def health_check():
 def debug_info():
     """Debug endpoint to check system status."""
     try:
-        return jsonify({
-            "database_initialized": database is not None,
-            "detector_initialized": detector is not None,
-            "embedder_initialized": embedder is not None,
-            "is_production": settings.IS_PRODUCTION,
-            "db_path": settings.DB_PATH,
-            "db_file_exists": os.path.exists(settings.DB_PATH),
-            "ctx_id": settings.CTX_ID,
-            "model_name": settings.MODEL_NAME
-        })
+        return jsonify(
+            {
+                "database_initialized": database is not None,
+                "detector_initialized": detector is not None,
+                "embedder_initialized": embedder is not None,
+                "is_production": settings.IS_PRODUCTION,
+                "db_path": settings.DB_PATH,
+                "db_file_exists": os.path.exists(settings.DB_PATH),
+                "ctx_id": settings.CTX_ID,
+                "model_name": settings.MODEL_NAME,
+            }
+        )
     except Exception as e:
         logger.error(f"Debug info failed: {e}")
         return jsonify({"error": str(e)}), 500
@@ -352,7 +365,7 @@ def database_info():
     try:
         if database is None:
             return jsonify({"success": False, "error": "Database not initialized"}), 500
-            
+
         db_info = database.get_database_info()
         return jsonify(
             {
