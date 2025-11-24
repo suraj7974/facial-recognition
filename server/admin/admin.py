@@ -224,6 +224,10 @@ def api_rebuild_db():
     proc = subprocess.run(cmd, capture_output=True, text=True)
     lf = LOG_DIR / f"rebuild_{int(os.times()[4])}.log"
     lf.write_text(proc.stdout + "\n\nSTDERR:\n" + proc.stderr, encoding="utf-8")
+    
+    # Touch the api_service.py to trigger a reload
+    os.utime(PROJECT_ROOT / "server" / "api_service.py", None)
+    
     return jsonify(
         {
             "success": True,

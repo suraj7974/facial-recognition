@@ -2,8 +2,13 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const axios = require('axios');
 const FormData = require('form-data');
+const express = require('express');
 
 const API_URL = process.env.API_URL || 'http://localhost:5000/api/recognize';
+
+// Express App
+const app = express();
+app.use(express.json());
 
 // WhatsApp client
 const client = new Client({
@@ -55,6 +60,7 @@ client.on('message', async (message) => {
         filename: `IMG_${Date.now()}.jpg`,
         contentType: mediaData.mimetype,
       });
+      formData.append('mobile_number', sender);
 
       console.log(`🚀 Sending image to API: ${API_URL}`);
       
@@ -124,6 +130,28 @@ client.on('message', async (message) => {
   }
 });
 
+// API Endpoint to send alert
+app.post('/send-alert', async (req, res) => {
+    const { message, to } = req.body;
+    if (!message || !to) {
+        return res.status(400).json({ success: false, error: 'Message and recipient number are required.' });
+    }
+
+    try {
+        // Sanitize the number by removing non-digit characters
+        const sanitizedTo = to.replace(/\D/g, '');
+        const chatId = `${sanitizedTo}@c.us`;
+
+        await client.sendMessage(chatId, message);
+        console.log(`✅ Alert sent to ${to}`);
+        res.json({ success: true, message: 'Alert sent successfully.' });
+    } catch (error) {
+        console.error('❌ Error sending alert:', error.message);
+        res.status(500).json({ success: false, error: 'Failed to send alert.' });
+    }
+});
+
+
 // Graceful shutdown
 process.on('SIGINT', async () => {
   console.log('\n🛑 Shutting down WhatsApp bot...');
@@ -135,3 +163,9 @@ process.on('SIGINT', async () => {
 console.log('🚀 Starting WhatsApp Bot...');
 console.log(`🔗 API URL: ${API_URL}\n`);
 client.initialize();
+
+// Start Express server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`🚀 Alert server listening on port ${PORT}`);
+});

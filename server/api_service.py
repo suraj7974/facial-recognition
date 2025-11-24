@@ -17,6 +17,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 import ssl
+import requests
 
 # Configure logging
 LOG_DIR = "logs"
@@ -108,6 +109,25 @@ def initialize_components():
             logger.info(f"Database loaded with {db_info['num_identities']} identities")
 
 
+def check_for_criminal(description):
+    """Check if the description contains any criminal keywords."""
+    if description:
+        for keyword in settings.CRIMINAL_KEYWORDS:
+            if keyword in description.lower():
+                return True
+    return False
+
+def send_whatsapp_alert(person_name, mobile_number):
+    """Send a WhatsApp alert to the configured number."""
+    try:
+        message = f"Potential serial criminal detected: {person_name}. The image was sent from mobile number: {mobile_number}"
+        # Make a post request to the whatsapp bot
+        requests.post("http://localhost:8080/send-alert", json={"message": message, "to": settings.ALERT_PHONE_NUMBER})
+        logger.info(f"Sent WhatsApp alert for {person_name} to {settings.ALERT_PHONE_NUMBER}")
+    except Exception as e:
+        logger.error(f"Failed to send WhatsApp alert: {e}")
+
+
 # Initialize only the database at startup to check if it exists
 try:
     if settings.USE_FAISS:
@@ -127,7 +147,7 @@ except Exception as e:
     database = None
 
 
-def process_image_recognition(image_data, recognition_threshold=None):
+def process_image_recognition(image_data, recognition_threshold=None, mobile_number=None):
     """
     Process image and perform face recognition.
 
@@ -181,6 +201,10 @@ def process_image_recognition(image_data, recognition_threshold=None):
         description = None
         if name is not None:
             description = database.get_description(name)
+            # Check for criminal keywords
+            if check_for_criminal(description):
+                send_whatsapp_alert(name, mobile_number)
+
 
         # Get all similarity scores
         all_scores = database.get_all_similarity_scores(embedding)
@@ -236,12 +260,17 @@ def recognize_face():
         )
     except ValueError:
         recognition_threshold = settings.RECOGNITION_THRESHOLD
+    
+    mobile_number = None
 
     # Process file upload
     if "image" in request.files:
         file = request.files["image"]
         if file.filename == "":
             return jsonify({"success": False, "error": "No selected file"}), 400
+
+        if "mobile_number" in request.form:
+            mobile_number = request.form.get("mobile_number")
 
         # Save uploaded file
         try:
@@ -274,6 +303,8 @@ def recognize_face():
     # Process base64 encoded image
     elif "image_base64" in request.json:
         try:
+            if "mobile_number" in request.json:
+                mobile_number = request.json.get("mobile_number")
             # Decode base64 image
             image_data = request.json["image_base64"]
             # Remove data URL prefix if present
@@ -308,7 +339,7 @@ def recognize_face():
             )
 
     # Process the image
-    result = process_image_recognition(img, recognition_threshold)
+    result = process_image_recognition(img, recognition_threshold, mobile_number)
 
     # Return the result
     return jsonify(result)

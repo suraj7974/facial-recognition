@@ -26,6 +26,21 @@ CTX_ID = -1  # 0 for GPU, -1 for CPU
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
+# Alert System
+CRIMINAL_KEYWORDS = [
+    "murder",
+    "murderer",
+    "killer",
+    "homicide",
+    "assassin",
+    "terrorist",
+    "rapist",
+    "kidnapper",
+    "abductor",
+    "felon",
+]
+ALERT_PHONE_NUMBER = "918299810917"
+
 # Initialize directories
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(LOG_DIR, exist_ok=True)
