@@ -4,20 +4,21 @@ API service for the face recognition system.
 This API allows for face recognition by accepting image uploads.
 """
 
-import os
-import sys
-import logging
-import json
 import base64
-import time
-import numpy as np
-import cv2
-from io import BytesIO
-from datetime import datetime
-from flask import Flask, request, jsonify
-from werkzeug.utils import secure_filename
+import json
+import logging
+import os
 import ssl
+import sys
+import time
+from datetime import datetime
+from io import BytesIO
+
+import cv2
+import numpy as np
 import requests
+from flask import Flask, jsonify, request
+from werkzeug.utils import secure_filename
 
 # Configure logging
 LOG_DIR = "logs"
@@ -29,7 +30,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.FileHandler(
-            os.path.join(LOG_DIR, f'api_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+            os.path.join(LOG_DIR, f"api_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
         ),
         logging.StreamHandler(),
     ],
@@ -38,11 +39,10 @@ logger = logging.getLogger(__name__)
 
 # Import from our modules
 from config import settings
-
-from src.face.detector import FaceDetector
-from src.face.embedder import FaceEmbedder
 from src.database.embeddings_db import EmbeddingsDatabase
 from src.database.faiss_db import FaissDatabase
+from src.face.detector import FaceDetector
+from src.face.embedder import FaceEmbedder
 
 # Initialize Flask application
 app = Flask(__name__)
@@ -117,13 +117,47 @@ def check_for_criminal(description):
                 return True
     return False
 
-def send_whatsapp_alert(person_name, mobile_number):
-    """Send a WhatsApp alert to the configured number."""
+
+def send_whatsapp_alert(person_name, mobile_number, description=None, confidence=0.0):
+    """Send a WhatsApp alert to the configured number with detailed information."""
     try:
-        message = f"Potential serial criminal detected: {person_name}. The image was sent from mobile number: {mobile_number}"
+        # Create formatted alert message with emojis and bold text
+        message = "🚨🚨🚨 *CRIMINAL ALERT* 🚨🚨🚨\n"
+        message += "━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        message += "⚠️ *POTENTIAL THREAT DETECTED* ⚠️\n\n"
+
+        # Person details
+        message += "👤 *SUSPECT INFORMATION:*\n"
+        message += f"   • *Name:* {person_name}\n"
+        message += f"   • *Match Confidence:* {(confidence * 100):.1f}%\n"
+
+        # Description if available
+        if description:
+            message += f"\n📋 *DETAILS:*\n"
+            # Split description into lines and format
+            desc_lines = description.strip().split("\n")
+            for line in desc_lines:
+                if line.strip():
+                    message += f"   {line.strip()}\n"
+
+        # Source information
+        message += f"\n📱 *SOURCE:*\n"
+        message += f"   • *Mobile Number:* +{mobile_number}\n"
+
+        # Timestamp
+        from datetime import datetime
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        message += f"   • *Time:* {timestamp}\n"
+
         # Make a post request to the whatsapp bot
-        requests.post("http://localhost:8080/send-alert", json={"message": message, "to": settings.ALERT_PHONE_NUMBER})
-        logger.info(f"Sent WhatsApp alert for {person_name} to {settings.ALERT_PHONE_NUMBER}")
+        requests.post(
+            "http://localhost:8080/send-alert",
+            json={"message": message, "to": settings.ALERT_PHONE_NUMBER},
+        )
+        logger.info(
+            f"Sent WhatsApp alert for {person_name} to {settings.ALERT_PHONE_NUMBER}"
+        )
     except Exception as e:
         logger.error(f"Failed to send WhatsApp alert: {e}")
 
@@ -147,7 +181,9 @@ except Exception as e:
     database = None
 
 
-def process_image_recognition(image_data, recognition_threshold=None, mobile_number=None):
+def process_image_recognition(
+    image_data, recognition_threshold=None, mobile_number=None
+):
     """
     Process image and perform face recognition.
 
@@ -203,8 +239,7 @@ def process_image_recognition(image_data, recognition_threshold=None, mobile_num
             description = database.get_description(name)
             # Check for criminal keywords
             if check_for_criminal(description):
-                send_whatsapp_alert(name, mobile_number)
-
+                send_whatsapp_alert(name, mobile_number, description, score)
 
         # Get all similarity scores
         all_scores = database.get_all_similarity_scores(embedding)
@@ -260,7 +295,7 @@ def recognize_face():
         )
     except ValueError:
         recognition_threshold = settings.RECOGNITION_THRESHOLD
-    
+
     mobile_number = None
 
     # Process file upload

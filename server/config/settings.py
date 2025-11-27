@@ -13,8 +13,8 @@ FAISS_LABELS_PATH = os.path.join(DATA_DIR, "face_db_labels.pkl")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 
 # Face Detection and Recognition
-DETECTION_THRESHOLD = 0.6  # Confidence threshold for face detection
-RECOGNITION_THRESHOLD = 0.5  # Similarity threshold for face recognition
+DETECTION_THRESHOLD = 0.3  # Confidence threshold for face detection
+RECOGNITION_THRESHOLD = 0.3  # Similarity threshold for face recognition
 USE_FAISS = False  # Whether to use FAISS for database operations
 MODEL_NAME = "buffalo_l"  # InsightFace model name
 
