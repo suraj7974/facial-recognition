@@ -16,7 +16,19 @@ import requests
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent.parent  # /face_recognition_system
 CELEB_ROOT = PROJECT_ROOT / "server" / "data" / "celeb_images"
-ALLOWED_EXT = {".jpg", ".jpeg", ".png", ".bmp"}
+ALLOWED_EXT = {
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".bmp",
+    ".webp",
+    ".gif",
+    ".tiff",
+    ".tif",
+    ".heic",
+    ".heif",
+    ".avif",
+}
 MAIN_SCRIPT = PROJECT_ROOT / "server" / "main.py"
 PYTHON = sys.executable
 LOG_DIR = PROJECT_ROOT / "logs"
@@ -312,7 +324,7 @@ def api_enroll():
 
     saved = 0
     for f in files:
-        if f and allowed_file(f.filename):
+        if f and f.filename and allowed_file(f.filename):
             fname = secure_filename(f.filename)
             out_path = folder / f"{int(time.time() * 1000)}_{fname}"
             f.save(str(out_path))

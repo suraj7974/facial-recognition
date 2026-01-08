@@ -84,14 +84,10 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         </NavLink>
       </nav>
 
-      <div className="sidebar-footer">
-        <small className="sidebar-text">Database: celeb_images</small>
-      </div>
-
       {/* Toggle button - positioned on the right edge, vertically centered */}
-      <button 
-        className="sidebar-toggle" 
-        onClick={onToggle} 
+      <button
+        className="sidebar-toggle"
+        onClick={onToggle}
         title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
       >
         <svg
