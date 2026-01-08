@@ -446,6 +446,59 @@ def database_info():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+@app.route("/api/database/reload", methods=["POST"])
+def reload_database():
+    """
+    Hot-reload the database from disk without restarting the server.
+    This endpoint is called after the admin panel rebuilds the database.
+    """
+    global database
+    try:
+        logger.info("Reloading database from disk...")
+
+        # Re-initialize the database from disk
+        if settings.USE_FAISS:
+            new_database = FaissDatabase()
+        else:
+            new_database = EmbeddingsDatabase()
+
+        # Verify the new database loaded correctly
+        db_info = new_database.get_database_info()
+
+        if db_info["num_identities"] == 0:
+            logger.warning("Reloaded database is empty")
+            return jsonify(
+                {
+                    "success": True,
+                    "warning": "Database reloaded but is empty",
+                    "num_identities": 0,
+                    "identities": [],
+                }
+            )
+
+        # Swap the database reference (atomic operation)
+        database = new_database
+
+        logger.info(
+            f"Database reloaded successfully with {db_info['num_identities']} identities"
+        )
+
+        return jsonify(
+            {
+                "success": True,
+                "message": "Database reloaded successfully",
+                "num_identities": db_info["num_identities"],
+                "identities": db_info["identities"],
+            }
+        )
+
+    except Exception as e:
+        logger.error(f"Failed to reload database: {e}")
+        return jsonify(
+            {"success": False, "error": f"Failed to reload database: {str(e)}"}
+        ), 500
+
+
 @app.route("/", methods=["GET"])
 def index():
     """Root endpoint for basic information."""

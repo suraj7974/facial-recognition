@@ -89,6 +89,16 @@ class FaissDatabase:
         except Exception as e:
             logger.error(f"Error saving FAISS database: {e}")
 
+    def clear_database(self):
+        """Clear all data from the database for a fresh rebuild."""
+        try:
+            self._initialize_index()
+            self.identities = []
+            self.metadata = {}
+            logger.info("Cleared FAISS database for fresh rebuild")
+        except Exception as e:
+            logger.error(f"Error clearing FAISS database: {e}")
+
     def add_identity(self, identity_name, embedding, num_images=1):
         """
         Add identity to database.

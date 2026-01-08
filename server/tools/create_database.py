@@ -40,6 +40,7 @@ def create_database_from_folders(
 ):
     """
     Create face embeddings database from folders of images.
+    This creates a FRESH database - it does NOT append to existing data.
 
     Args:
         root_folder: Root folder containing subfolders named after people
@@ -54,19 +55,25 @@ def create_database_from_folders(
     detector = FaceDetector()
     embedder = FaceEmbedder()
 
-    # Initialize database
+    # Initialize database with a FRESH/EMPTY state
+    # We create the database object but immediately clear it to ensure
+    # we're building from scratch (not appending to existing data)
     if use_faiss:
         if db_path:
             db = FaissDatabase(db_path=db_path)
         else:
             db = FaissDatabase()
+        # Clear existing data for fresh rebuild
+        db.clear_database()
     else:
         if db_path:
             db = EmbeddingsDatabase(db_path=db_path)
         else:
             db = EmbeddingsDatabase()
+        # Clear existing data for fresh rebuild
+        db.database = {}
 
-    logger.info(f"Creating database from {root_folder}")
+    logger.info(f"Creating FRESH database from {root_folder}")
     logger.info(f"Using {'FAISS' if use_faiss else 'standard'} database")
 
     # Check if root folder exists
